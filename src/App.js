@@ -56,17 +56,17 @@ const WildfiresIcon = () => (
       <pattern id="pattern-vertical-wildfire-final" width="1.5" height="4" patternUnits="userSpaceOnUse">
         <line x1="0.75" y1="0" x2="0.75" y2="4" stroke="currentColor" strokeWidth="0.5" />
       </pattern>
-      {/* Clip path for the LEFT half of the fire shape */}
-      <clipPath id="clip-left-wildfire-final">
-        <rect x="0" y="0" width="12" height="24" />
+      {/* Clip path for the extended left part of the fire shape */}
+      <clipPath id="clip-left-extended-wildfire">
+        <rect x="0" y="0" width="14" height="24" />
       </clipPath>
     </defs>
 
-    {/* The full fire shape, with the LEFT half filled via pattern and clip path */}
+    {/* The full fire shape, with the extended left part filled via pattern and clip path */}
     <path
       d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14.5 5 16.5 8 16.5 10c0-1.995.189-4.418 2.48-6.082A8.001 8.001 0 0117.657 18.657z"
       fill="url(#pattern-vertical-wildfire-final)"
-      clipPath="url(#clip-left-wildfire-final)"
+      clipPath="url(#clip-left-extended-wildfire)"
       stroke="none"
     />
 
@@ -97,7 +97,7 @@ const Header = ({ currentPage, setPage }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            {/* Logo and Title as a button */}
+            {/* Logo and Title */}
             <button
               onClick={() => setPage('home')}
               className="flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md"
@@ -320,7 +320,7 @@ export default function App() {
       dataInterpretation: (
          <>
          <p>Obstacles to using the data include:</p>
-         <ul className="list-disc list-inside mt-2">
+         <ul className="list-disc list-inside ml-4 mt-2">
             <li><strong>River Geometry Limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only.</li>
             <li><strong>Calibration & Validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</li>
             <li><strong>Data Quality vs. Availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</li>
