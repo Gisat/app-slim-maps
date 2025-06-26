@@ -97,23 +97,21 @@ const Header = ({ currentPage, setPage }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            {/* Logo and Title */}
-            <a href="#" onClick={(e) => { e.preventDefault(); setPage('home');}} className="flex items-center cursor-pointer">
-              {/* NOTE: Filename updated */}
+            {/* Logo and Title as a button */}
+            <button
+              onClick={() => setPage('home')}
+              className="flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md"
+            >
               <img className="h-10 w-auto text-xl font-bold text-gray-800" src="SLIM_logo.png" alt="SLIM" />
               <span className="ml-3 text-xl font-bold text-gray-800">Maps</span>
-            </a>
+            </button>
           </div>
           <nav className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.id}
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setPage(link.id);
-                  }}
+                  onClick={() => setPage(link.id)}
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
                     currentPage === link.id
                       ? 'text-white bg-blue-600'
@@ -121,11 +119,11 @@ const Header = ({ currentPage, setPage }) => {
                   } transition-colors duration-200`}
                 >
                   {link.title}
-                </a>
+                </button>
               ))}
             </div>
           </nav>
-           {/* Mobile Menu Button */}
+           {/* Mobile Menu as a select dropdown */}
            <div className="md:hidden">
               <select 
                 aria-label="Navigation"
