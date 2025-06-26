@@ -1,0 +1,31 @@
+name: Deploy SLIM Maps Website to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # The action runs every time you push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Use a clean virtual machine
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4 # Checks out your repository's code
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Use a stable version of Node.js
+          cache: 'npm'
+
+      - name: Install Dependencies 📦
+        run: npm ci # A faster, more reliable version of 'npm install' for automation
+
+      - name: Build Project 🛠️
+        run: npm run build # This runs the 'react-scripts build' command on GitHub's server
+
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # Deploy the 'build' folder
