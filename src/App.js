@@ -276,19 +276,14 @@ export default function App() {
             Land cover types were selected and validated with the active participation of Zambian public sector stakeholders to reflect their specific needs and use cases.
           </p>
           <p className="mt-4">
-            <strong>Data Inputs</strong>
+            <strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000–2024.
           </p>
-          <ul className="list-disc list-inside ml-4 mt-2">
-            <li>
-              <strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000 – 2024.
-            </li>
-            <li>
-              <strong>Ancillary data:</strong> Digital Elevation Model (DEM-SRTM).
-            </li>
-            <li>
-              <strong>Training data:</strong> Existing Land Cover maps (SLIM Baseline 2023, WorldCover2020, WorldCover2021) and ancillary datasets including GlobalForestWatch, OpenStreetMap, WorldCereal, ZambiaWSF, GHSL, WorldWater, Hydro Zambia, and Global Wetlands.
-            </li>
-          </ul>
+          <p className="mt-2">
+            <strong>Ancillary data:</strong> Digital Elevation Model (DEM-SRTM).
+          </p>
+          <p className="mt-2">
+            <strong>Training data:</strong> Existing Land Cover maps (SLIM Baseline 2023, WorldCover2020, WorldCover2021) and ancillary datasets including GlobalForestWatch, OpenStreetMap, WorldCereal, ZambiaWSF, GHSL, WorldWater, Hydro Zambia, and Global Wetlands.
+          </p>
            <p className="mt-4">The data was interpreted using a proprietary, state-of-the-art Machine Learning classification processing chain.</p>
         </>
       ),
@@ -302,35 +297,28 @@ export default function App() {
       mapUrl: "https://placehold.co/1200x600/60a5fa/1e3a8a?text=Floods+Map+Embed",
       dataDescription: (
         <>
-            <p><strong>Data Inputs</strong></p>
-            <p className="mt-2"><strong>HAND (Height Above Nearest Drainage) Model:</strong></p>
-            <ul className="list-disc list-inside ml-4">
-                <li>DEM (Digital Elevation Model): SRTM (Shuttle Radar Topography Mission) data, approximately 30m resolution, was used.</li>
-                <li>Rivers: HydroATLAS Zambia data was used for river networks.</li>
-            </ul>
+            <p className="mt-2">The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
+            <p className="mt-2"><strong>DEM (Digital Elevation Model):</strong> SRTM (Shuttle Radar Topography Mission) data, approximately 30m resolution, was used.</p>
+            <p className="mt-2"><strong>Rivers:</strong> HydroATLAS Zambia data was used for river networks.</p>
             
-            <p className="mt-4"><strong>Other relevant inputs for flood analysis:</strong></p>
-            <ul className="list-disc list-inside ml-4">
-                <li>GLOFAS (Global Flood Awareness System): Long time series data (1980-2018, daily values) for approximating discharges in coarse resolution.</li>
-                <li>JRC Flood Map (Joint Research Centre): A map for a 100-year return period, valuable for estimating and validating expected flood extent.</li>
-                <li>ESA WorldCover 2021: Used for hydrological characteristics of watersheds based on land cover.</li>
-            </ul>
+            <p className="mt-4">Other relevant inputs for flood analysis include:</p>
+            <p className="mt-2"><strong>GLOFAS (Global Flood Awareness System):</strong> Long time series data (1980-2018, daily values) for approximating discharges in coarse resolution.</p>
+            <p className="mt-2"><strong>JRC Flood Map (Joint Research Centre):</strong> A map for a 100-year return period, valuable for estimating and validating expected flood extent.</p>
+            <p className="mt-2"><strong>ESA WorldCover 2021:</strong> Used for hydrological characteristics of watersheds based on land cover.</p>
         </>
       ),
       dataInterpretation: (
          <>
          <p>Obstacles to using the data include:</p>
-         <ul className="list-disc list-inside ml-4 mt-2">
-            <li><strong>River Geometry Limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only.</li>
-            <li><strong>Calibration & Validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</li>
-            <li><strong>Data Quality vs. Availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</li>
-            <li><strong>HAND Limitations:</strong> HAND is a conceptual model, not a full hydrodynamic model, and does not consider factors like geological characteristics.</li>
-         </ul>
+         <p className="mt-2"><strong>River geometry limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only.</p>
+         <p className="mt-2"><strong>Calibration & validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</p>
+         <p className="mt-2"><strong>Data quality vs. availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</p>
+         <p className="mt-2"><strong>HAND limitations:</strong> HAND is a conceptual model, not a full hydrodynamic model, and does not consider factors like geological characteristics.</p>
         </>
       )
     },
     wildfires: {
-      title: "Wildfires Activity",
+      title: "Wildfires",
       intro: "This map service provides up-to-date information on wildfire activity, including current fire perimeters, burn scar analysis, and assessments of a fire risk based on vegetation and weather conditions.",
       mapUrl: "https://placehold.co/1200x600/f97316/7c2d12?text=Wildfires+Map+Embed",
       dataDescription: (
