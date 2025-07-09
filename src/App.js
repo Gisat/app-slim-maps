@@ -294,7 +294,7 @@ export default function App() {
     floods: {
       title: "Floods",
       intro: "Flood mapping aims to improve preparedness and response by identifying communities and infrastructure at risk, supporting mitigation efforts and emergency planning. These risk assessments are primarily based on topographical models, such as the HAND model, and include historical flood data.",
-      mapUrl: "https://placehold.co/1200x600/60a5fa/1e3a8a?text=Floods+Map+Embed",
+      mapUrl: "https://gisat.github.io/slim-121-floods-map/",
       dataDescription: (
         <>
             <p className="mt-2">The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
