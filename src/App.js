@@ -40,11 +40,11 @@ const FloodsIcon = () => (
             strokeLinecap="round"
             strokeLinejoin="round"
         />
-        {/* Four dense, wavy lines inside the house */}
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 14 C 7 13, 9 13, 11 14 S 15 15, 17 14 S 19 13, 19 13" />
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 16 C 7 15, 9 15, 11 16 S 15 17, 17 16 S 19 15, 19 15" />
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 18 C 7 17, 9 17, 11 18 S 15 19, 17 18 S 19 17, 19 17" />
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 20 C 7 19, 9 19, 11 20 S 15 21, 17 20 S 19 19, 19 19" />
+        {/* Four dense, straight horizontal lines inside the house */}
+        <path strokeWidth="0.5" strokeLinecap="round" d="M5 14 H 19" />
+        <path strokeWidth="0.5" strokeLinecap="round" d="M5 16 H 19" />
+        <path strokeWidth="0.5" strokeLinecap="round" d="M5 18 H 19" />
+        <path strokeWidth="0.5" strokeLinecap="round" d="M5 20 H 19" />
     </svg>
 );
 
@@ -52,25 +52,25 @@ const FloodsIcon = () => (
 const WildfiresIcon = () => (
   <svg className="w-16 h-16 mb-4 text-red-600" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      {/* Pattern: Denser vertical lines */}
-      <pattern id="pattern-vertical-wildfire-final" width="1.5" height="4" patternUnits="userSpaceOnUse">
-        <line x1="0.75" y1="0" x2="0.75" y2="4" stroke="currentColor" strokeWidth="0.5" />
+      {/* Pattern: Vertical lines with spacing matched to Landscape Change icon */}
+      <pattern id="pattern-vertical-wildfire-fixed" width="2" height="4" patternUnits="userSpaceOnUse">
+        <line x1="1" y1="0" x2="1" y2="4" stroke="currentColor" strokeWidth="0.5" />
       </pattern>
-      {/* Clip path for the extended left part of the fire shape */}
-      <clipPath id="clip-left-extended-wildfire">
+      {/* Clip path to only show the left half, extended by one line */}
+      <clipPath id="clip-left-half">
         <rect x="0" y="0" width="14" height="24" />
       </clipPath>
     </defs>
 
-    {/* The full fire shape, with the extended left part filled via pattern and clip path */}
+    {/* The full fire shape, but with the pattern only applied to the left half via clip-path */}
     <path
       d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14.5 5 16.5 8 16.5 10c0-1.995.189-4.418 2.48-6.082A8.001 8.001 0 0117.657 18.657z"
-      fill="url(#pattern-vertical-wildfire-final)"
-      clipPath="url(#clip-left-extended-wildfire)"
+      fill="url(#pattern-vertical-wildfire-fixed)"
+      clipPath="url(#clip-left-half)"
       stroke="none"
     />
 
-    {/* The fire outline on top, with no fill */}
+    {/* The fire outline on top, with no fill, covering the whole shape */}
     <path
       d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14.5 5 16.5 8 16.5 10c0-1.995.189-4.418 2.48-6.082A8.001 8.001 0 0117.657 18.657z"
       fill="none"
