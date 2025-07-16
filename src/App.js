@@ -102,7 +102,7 @@ const Header = ({ currentPage, setPage }) => {
               onClick={() => setPage('home')}
               className="flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md"
             >
-              <img className="h-10 w-auto text-xl font-bold text-gray-800" src="SLIM_logo.png" alt="SLIM" />
+              <img className="h-10 w-auto text-xl font-bold text-gray-800" src="SLIM_logo.png" alt="SLIM" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/100x40/ccc/000?text=Logo'; }} />
               <span className="ml-3 text-xl font-bold text-gray-800">Maps</span>
             </button>
           </div>
@@ -192,43 +192,66 @@ const HomePage = ({ setPage }) => {
   );
 };
 
-// --- ACTIVITY PAGE COMPONENT ---
-// This is a generic template for the Land Cover, Floods, and Wildfires pages.
+// --- ACTIVITY PAGE COMPONENT (REVISED) ---
+// This component now features a full-screen map with a collapsible info panel.
 const ActivityPage = ({ title, intro, mapUrl, dataDescription, dataInterpretation }) => {
+  const [isPanelOpen, setIsPanelOpen] = useState(true);
+
+  // Chevron Icon for the collapse/expand button
+  const ChevronIcon = ({ isOpen }) => (
+    <svg className={`w-6 h-6 text-gray-700 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+  );
+
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="max-w-4xl mx-auto">
-        {/* Page Header */}
-        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">{title}</h2>
-        <p className="mt-4 text-xl text-gray-600">
-          {intro}
-        </p>
+    // This container will fill the <main> tag. It's the positioning context for the map and panel.
+    <div className="relative w-full h-full">
+      {/* Embedded Map - positioned to fill this container */}
+      <iframe
+        className="absolute top-0 left-0 w-full h-full border-0"
+        src={mapUrl}
+        title={`${title} Map`}
+        allowFullScreen
+      ></iframe>
 
-        {/* Embedded Map */}
-        <div className="mt-8 bg-gray-200 rounded-lg shadow-inner overflow-hidden">
-          <iframe
-            className="w-full h-auto aspect-video"
-            src={mapUrl}
-            title={`${title} Map`}
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        </div>
-
-        {/* Data Description */}
-        <div className="mt-12">
-          <h3 className="text-2xl font-bold text-gray-900">Data Description</h3>
-          <div className="mt-4 prose prose-lg text-gray-600 max-w-none">
-             {dataDescription}
-          </div>
+      {/* Collapsible Info Panel */}
+      <div
+        className={`absolute top-4 left-4 z-10 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-xl transition-all duration-300 ease-in-out max-w-md w-11/12`}
+      >
+        {/* Panel Header - Click to toggle */}
+        <div className="flex justify-between items-center p-4 cursor-pointer" onClick={() => setIsPanelOpen(!isPanelOpen)}>
+            <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+            <button
+                className="p-2 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                aria-expanded={isPanelOpen}
+                aria-controls="info-panel-content"
+                aria-label="Toggle information panel"
+            >
+                <ChevronIcon isOpen={isPanelOpen} />
+            </button>
         </div>
         
-        {/* Data Interpretation */}
-        <div className="mt-12">
-          <h3 className="text-2xl font-bold text-gray-900">Data Interpretation</h3>
-          <div className="mt-4 prose prose-lg text-gray-600 max-w-none">
-             {dataInterpretation}
-          </div>
+        {/* Panel Content - Expands and collapses */}
+        <div
+          id="info-panel-content"
+          className={`transition-all duration-300 ease-in-out overflow-hidden ${isPanelOpen ? 'max-h-[calc(100vh-10rem)]' : 'max-h-0'}`}
+        >
+            <div className="px-4 pb-4 overflow-y-auto" style={{maxHeight: 'calc(100vh - 12rem)'}}>
+                <p className="text-gray-700">{intro}</p>
+                
+                <hr className="my-4 border-gray-300" />
+
+                <div>
+                    <h3 className="text-xl font-bold text-gray-900">Data Description</h3>
+                    <div className="mt-2 prose text-gray-600 max-w-none">{dataDescription}</div>
+                </div>
+                
+                <hr className="my-4 border-gray-300" />
+
+                <div>
+                    <h3 className="text-xl font-bold text-gray-900">Data Interpretation</h3>
+                    <div className="mt-2 prose text-gray-600 max-w-none">{dataInterpretation}</div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
@@ -239,13 +262,13 @@ const ActivityPage = ({ title, intro, mapUrl, dataDescription, dataInterpretatio
 // --- FOOTER COMPONENT ---
 const Footer = ({ currentPage }) => {
     return (
-        <footer className="bg-gray-800 mt-auto text-gray-400 text-sm">
+        <footer className="bg-gray-800 text-gray-400 text-sm">
             <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
                 {currentPage === 'home' && (
                   <div className="mb-4">
                     <p className="mb-2">Funded by:</p>
                     {/* NOTE: Filename updated */}
-                    <img className="h-10 inline-block" src="CzechAid_basic_frame_sanitized.png" alt="Czech Aid Logo" />
+                    <img className="h-10 inline-block" src="CzechAid_basic_frame_sanitized.png" alt="Czech Aid Logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/120x40/ccc/000?text=Logo'; }}/>
                   </div>
                 )}
                 <p>
@@ -320,7 +343,7 @@ export default function App() {
     wildfires: {
       title: "Wildfires",
       intro: "This map service provides up-to-date information on wildfire activity, including current fire perimeters, burn scar analysis, and assessments of a fire risk based on vegetation and weather conditions.",
-      mapUrl: "https://placehold.co/1200x600/f97316/7c2d12?text=Wildfires+Map+Embed",
+      mapUrl: "https://gisat.github.io/slim-131-wildfires-map/",
       dataDescription: (
         <p>The wildfire data integrates multiple sources, including satellite thermal hotspot detections and weather forecasts. The risk assessment model considers factors like vegetation type, fuel load, slope, and current drought conditions. This tool is intended for use by fire management agencies and the public to promote awareness and safety.</p>
       ),
@@ -346,12 +369,13 @@ export default function App() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col font-sans">
+    <div className="bg-gray-100 h-screen flex flex-col font-sans">
       <Header currentPage={currentPage} setPage={setPage} />
-      <main className="flex-grow">
+      <main className="flex-grow relative">
         {renderPage()}
       </main>
-      <Footer currentPage={currentPage} />
+      {/* Footer is now only displayed on the home page */}
+      {currentPage === 'home' && <Footer currentPage={currentPage} />}
     </div>
   );
 }
