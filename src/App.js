@@ -140,55 +140,62 @@ const Header = ({ currentPage, setPage }) => {
   );
 };
 
-// --- HOME PAGE COMPONENT ---
+// --- HOME PAGE COMPONENT (REVISED) ---
 const HomePage = ({ setPage }) => {
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-          SLIM Project Online Maps
-        </h2>
-        <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
-          The SLIM (Sustainable Landscape through Integrated Management) project aims to build institutional capacity in Zambia for effective landscape management and natural disaster preparedness through the use of geospatial data.
-        </p>
-        <p className="mt-2 max-w-3xl mx-auto text-lg text-gray-600">
-          Explore maps in three thematic areas: Landscape Change, Floods, and Wildfires
-        </p>
-      </div>
-
-      {/* Activity Tiles */}
-      <div className="mt-12 grid gap-8 md:grid-cols-3">
-        {/* Landscape Change Tile */}
-        <div 
-          className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-          onClick={() => setPage('landscapechange')}
-        >
-          <LandscapeChangeIcon />
-          <h3 className="text-2xl font-bold text-gray-900">Landscape Change</h3>
-          <p className="mt-2 text-gray-600">Explore land cover and land cover flows in detail</p>
-        </div>
-
-        {/* Floods Tile */}
-        <div 
-          className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-          onClick={() => setPage('floods')}
-        >
-          <FloodsIcon />
-          <h3 className="text-2xl font-bold text-gray-900">Floods</h3>
-          <p className="mt-2 text-gray-600">View maps of flood-prone areas and historical inundation events.</p>
-        </div>
-
-        {/* Wildfires Tile */}
-        <div 
-          className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-          onClick={() => setPage('wildfires')}
-        >
-          <WildfiresIcon />
-          <h3 className="text-2xl font-bold text-gray-900">Wildfires</h3>
-          <p className="mt-2 text-gray-600">Explore wildfire risk, historical burn scars and active fire data</p>
+    <>
+      {/* Hero Section */}
+      <div className="bg-gradient-to-b from-green-50 via-blue-50 to-gray-100 pt-20 pb-16 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+            SLIM Project Online Maps
+          </h2>
+          <p className="mt-6 max-w-3xl mx-auto text-xl text-gray-700">
+            The SLIM (Sustainable Landscape through Integrated Management) project aims to build institutional capacity in Zambia for effective landscape management and natural disaster preparedness through the use of geospatial data.
+          </p>
+          <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+            Explore maps in three thematic areas: Landscape Change, Floods, and Wildfires
+          </p>
         </div>
       </div>
-    </div>
+
+      {/* Activity Tiles Section */}
+      <div className="bg-gray-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Landscape Change Tile */}
+            <div 
+              className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              onClick={() => setPage('landscapechange')}
+            >
+              <LandscapeChangeIcon />
+              <h3 className="text-2xl font-bold text-gray-900">Landscape Change</h3>
+              <p className="mt-2 text-gray-600">Explore land cover and land cover flows in detail</p>
+            </div>
+
+            {/* Floods Tile */}
+            <div 
+              className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              onClick={() => setPage('floods')}
+            >
+              <FloodsIcon />
+              <h3 className="text-2xl font-bold text-gray-900">Floods</h3>
+              <p className="mt-2 text-gray-600">View maps of flood-prone areas and historical inundation events.</p>
+            </div>
+
+            {/* Wildfires Tile */}
+            <div 
+              className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              onClick={() => setPage('wildfires')}
+            >
+              <WildfiresIcon />
+              <h3 className="text-2xl font-bold text-gray-900">Wildfires</h3>
+              <p className="mt-2 text-gray-600">Explore wildfire risk, historical burn scars and active fire data</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
