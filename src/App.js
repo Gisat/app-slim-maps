@@ -222,7 +222,7 @@ const ActivityPage = ({ title, intro, mapUrl, dataDescription, dataInterpretatio
 
       {/* Collapsible Info Panel */}
       <div
-        className={`absolute top-4 left-4 z-10 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-xl transition-all duration-300 ease-in-out max-w-md w-11/12`}
+        className={`absolute top-4 left-4 z-10 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-xl transition-all duration-300 ease-in-out max-w-md w-5/6 sm:w-11/12`}
       >
         {/* Panel Header - Click to toggle */}
         <div className="flex justify-between items-center p-4 cursor-pointer" onClick={() => setIsPanelOpen(!isPanelOpen)}>
