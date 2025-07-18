@@ -296,7 +296,7 @@ export default function App() {
     landscapechange: {
       title: "Landscape Change",
       intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
-      mapUrl: "https://gisat.github.io/slim-112-landcover-map/#6/-13.499/28.478",
+      mapUrl: "https://gisat.github.io/slim-112-lulc-map/#7/-14.600/27.729",
       dataDescription: (
         <>
           <p>
