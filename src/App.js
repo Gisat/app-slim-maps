@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // --- ICONS ---
 // Simple SVG icons for the activity tiles.
@@ -201,8 +201,23 @@ const HomePage = ({ setPage }) => {
 
 // --- ACTIVITY PAGE COMPONENT (REVISED) ---
 // This component now features a full-screen map with a collapsible info panel.
-const ActivityPage = ({ title, intro, mapUrl, dataDescription, dataInterpretation }) => {
+// It also handles tabbed content for the Wildfires page.
+const ActivityPage = (props) => {
+  const { title } = props;
+  const isWildfirePage = title === "Wildfires";
+  
   const [isPanelOpen, setIsPanelOpen] = useState(true);
+  // Set the initial active tab only for the wildfire page.
+  const [activeTab, setActiveTab] = useState(isWildfirePage ? props.tabs[0].id : null);
+
+  // Determine the content to display based on the page type (and tab if applicable)
+  let currentContent;
+  if (isWildfirePage) {
+    currentContent = props.maps[activeTab];
+  } else {
+    currentContent = props;
+  }
+  const { intro, mapUrl, dataDescription, dataInterpretation } = currentContent;
 
   // Chevron Icon for the collapse/expand button
   const ChevronIcon = ({ isOpen }) => (
@@ -210,21 +225,16 @@ const ActivityPage = ({ title, intro, mapUrl, dataDescription, dataInterpretatio
   );
 
   return (
-    // This container will fill the <main> tag. It's the positioning context for the map and panel.
     <div className="relative w-full h-full">
-      {/* Embedded Map - positioned to fill this container */}
       <iframe
+        key={mapUrl} // Use key to force iframe to re-render on URL change
         className="absolute top-0 left-0 w-full h-full border-0"
         src={mapUrl}
         title={`${title} Map`}
         allowFullScreen
       ></iframe>
 
-      {/* Collapsible Info Panel */}
-      <div
-        className={`absolute top-4 left-4 z-10 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-xl transition-all duration-300 ease-in-out max-w-md w-5/6 sm:w-11/12`}
-      >
-        {/* Panel Header - Click to toggle */}
+      <div className={`absolute top-4 left-4 z-10 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-xl transition-all duration-300 ease-in-out max-w-md w-5/6 sm:w-11/12`}>
         <div className="flex justify-between items-center p-4 cursor-pointer" onClick={() => setIsPanelOpen(!isPanelOpen)}>
             <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
             <button
@@ -237,23 +247,36 @@ const ActivityPage = ({ title, intro, mapUrl, dataDescription, dataInterpretatio
             </button>
         </div>
         
-        {/* Panel Content - Expands and collapses */}
-        <div
-          id="info-panel-content"
-          className={`transition-all duration-300 ease-in-out overflow-hidden ${isPanelOpen ? 'max-h-[calc(100vh-10rem)]' : 'max-h-0'}`}
-        >
+        <div id="info-panel-content" className={`transition-all duration-300 ease-in-out overflow-hidden ${isPanelOpen ? 'max-h-[calc(100vh-10rem)]' : 'max-h-0'}`}>
             <div className="px-4 pb-4 overflow-y-auto" style={{maxHeight: 'calc(100vh - 12rem)'}}>
-                <p className="text-gray-700">{intro}</p>
+                {/* Tab UI for Wildfire Page */}
+                {isWildfirePage && (
+                    <div className="border-b border-gray-300 mb-4">
+                        <nav className="-mb-px flex space-x-4" aria-label="Tabs">
+                            {props.tabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`${
+                                        activeTab === tab.id
+                                        ? 'border-blue-500 text-blue-600'
+                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                    } whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm`}
+                                >
+                                    {tab.name}
+                                </button>
+                            ))}
+                        </nav>
+                    </div>
+                )}
                 
+                <p className="text-gray-700">{intro}</p>
                 <hr className="my-4 border-gray-300" />
-
                 <div>
                     <h3 className="text-xl font-bold text-gray-900">Data Description</h3>
                     <div className="mt-2 prose text-gray-600 max-w-none">{dataDescription}</div>
                 </div>
-                
                 <hr className="my-4 border-gray-300" />
-
                 <div>
                     <h3 className="text-xl font-bold text-gray-900">Data Interpretation</h3>
                     <div className="mt-2 prose text-gray-600 max-w-none">{dataInterpretation}</div>
@@ -274,7 +297,6 @@ const Footer = ({ currentPage }) => {
                 {currentPage === 'home' && (
                   <div className="mb-4">
                     <p className="mb-2">Funded by:</p>
-                    {/* NOTE: Filename updated */}
                     <img className="h-10 inline-block" src="CzechAid_basic_frame_sanitized.png" alt="Czech Aid Logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/120x40/ccc/000?text=Logo'; }}/>
                   </div>
                 )}
@@ -296,25 +318,12 @@ export default function App() {
     landscapechange: {
       title: "Landscape Change",
       intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
-      mapUrl: "https://gisat.github.io/slim-112-lulc-map/#7/-14.600/27.729",
+      mapUrl: "https://gisat.github.io/slim-112-landcover-map/#6/-13.499/28.478",
       dataDescription: (
         <>
-          <p>
-            The data presented here is derived from high resolution satellite imagery and processed using advanced machine learning algorithms. It delivers a detailed portrait of the landscape and its changes, capturing natural features, vegetation, and patterns of human activity with precision.
-          </p>
-          <p className="mt-4">
-            Land cover types were selected and validated with the active participation of Zambian public sector stakeholders to reflect their specific needs and use cases.
-          </p>
-          <p className="mt-4">
-            <strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000–2024.
-          </p>
-          <p className="mt-2">
-            <strong>Ancillary data:</strong> Digital Elevation Model (DEM-SRTM).
-          </p>
-          <p className="mt-2">
-            <strong>Training data:</strong> Existing Land Cover maps (SLIM Baseline 2023, WorldCover2020, WorldCover2021) and ancillary datasets including GlobalForestWatch, OpenStreetMap, WorldCereal, ZambiaWSF, GHSL, WorldWater, Hydro Zambia, and Global Wetlands.
-          </p>
-           <p className="mt-4">The data was interpreted using a proprietary, state-of-the-art Machine Learning classification processing chain.</p>
+          <p>The data presented here is derived from high resolution satellite imagery and processed using advanced machine learning algorithms. It delivers a detailed portrait of the landscape and its changes, capturing natural features, vegetation, and patterns of human activity with precision.</p>
+          <p className="mt-4">Land cover types were selected and validated with the active participation of Zambian public sector stakeholders to reflect their specific needs and use cases.</p>
+          <p className="mt-4"><strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000–2024.</p>
         </>
       ),
       dataInterpretation: (
@@ -327,36 +336,43 @@ export default function App() {
       mapUrl: "https://gisat.github.io/slim-121-floods-map/",
       dataDescription: (
         <>
-            <p className="mt-2">The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
-            <p className="mt-2"><strong>DEM (Digital Elevation Model):</strong> SRTM (Shuttle Radar Topography Mission) data, approximately 30m resolution, was used.</p>
-            <p className="mt-2"><strong>Rivers:</strong> HydroATLAS Zambia data was used for river networks.</p>
-            
-            <p className="mt-4">Other relevant inputs for flood analysis include:</p>
-            <p className="mt-2"><strong>GLOFAS (Global Flood Awareness System):</strong> Long time series data (1980-2018, daily values) for approximating discharges in coarse resolution.</p>
-            <p className="mt-2"><strong>JRC Flood Map (Joint Research Centre):</strong> A map for a 100-year return period, valuable for estimating and validating expected flood extent.</p>
-            <p className="mt-2"><strong>ESA WorldCover 2021:</strong> Used for hydrological characteristics of watersheds based on land cover.</p>
+            <p className="mt-2">The HAND (Height Above Nearest Drainage) model is based on the following data sources: DEM and river networks.</p>
+            <p className="mt-4">Other relevant inputs for flood analysis include GLOFAS, JRC Flood Map, and ESA WorldCover 2021.</p>
         </>
       ),
       dataInterpretation: (
          <>
-         <p>Obstacles to using the data include:</p>
-         <p className="mt-2"><strong>River geometry limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only.</p>
-         <p className="mt-2"><strong>Calibration & validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</p>
-         <p className="mt-2"><strong>Data quality vs. availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</p>
-         <p className="mt-2"><strong>HAND limitations:</strong> HAND is a conceptual model, not a full hydrodynamic model, and does not consider factors like geological characteristics.</p>
+         <p>Obstacles to using the data include river geometry limitation, lack of calibration & validation data, and the conceptual limitations of the HAND model.</p>
         </>
       )
     },
     wildfires: {
       title: "Wildfires",
-      intro: "This map service provides up-to-date information on wildfire activity, including current fire perimeters, burn scar analysis, and assessments of a fire risk based on vegetation and weather conditions.",
-      mapUrl: "https://gisat.github.io/slim-131-wildfires-map/",
-      dataDescription: (
-        <p>The wildfire data integrates multiple sources, including satellite thermal hotspot detections and weather forecasts. The risk assessment model considers factors like vegetation type, fuel load, slope, and current drought conditions. This tool is intended for use by fire management agencies and the public to promote awareness and safety.</p>
-      ),
-      dataInterpretation: (
-        <p>Interpret the wildfire risk map as a guide for strategic planning. Areas marked as high-risk may warrant proactive measures like creating firebreaks or conducting controlled burns. The historical burn scar data can help in understanding fire frequency and ecosystem response.</p>
-      )
+      tabs: [
+          { id: 'assessment', name: 'Assessment' },
+          { id: 'detected', name: 'Detected Fire Events' },
+          { id: 'annual', name: 'Annual Overview' },
+      ],
+      maps: {
+          assessment: {
+              mapUrl: "https://gisat.github.io/slim-122-wildfires-map/zambia_fire_map_corrected.html",
+              intro: "The Wildfire Risk Assessment map service provides up-to-date information on wildfire risk based on vegetation and weather conditions.",
+              dataDescription: <p>The risk assessment model considers factors like vegetation type, fuel load, slope, and current drought conditions. This tool is intended for use by fire management agencies and the public to promote awareness and safety.</p>,
+              dataInterpretation: <p>Interpret the wildfire risk map as a guide for strategic planning. Areas marked as high-risk may warrant proactive measures like creating firebreaks or conducting controlled burns.</p>
+          },
+          detected: {
+              mapUrl: "https://gisat.github.io/slim-122-wildfires-map/zambia_fire_S3_map_full.html",
+              intro: "This map shows active fire events as detected by satellite thermal hotspots.",
+              dataDescription: <p>This data integrates multiple sources, including near real-time satellite thermal hotspot detections from VIIRS and MODIS. The data shows the location of active fires within the last 24-48 hours.</p>,
+              dataInterpretation: <p>Use this map for situational awareness of ongoing fire events. Note that cloud cover can obscure satellite detections.</p>
+          },
+          annual: {
+              mapUrl: "https://gisat.github.io/slim-122-wildfires-map/zambia_fire_S3_chart_with_legend_and_trendlines.html",
+              intro: "This map provides an overview of total burned areas for a selected year.",
+              dataDescription: <p>The historical burn scar data is derived from analysis of Sentinel-2 satellite imagery, identifying areas that have been affected by fire over the selected annual period.</p>,
+              dataInterpretation: <p>The historical burn scar data can help in understanding fire frequency, ecosystem response, and long-term fire regime patterns.</p>
+          }
+      }
     }
   };
 
