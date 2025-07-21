@@ -336,7 +336,7 @@ export default function App() {
     landscapechange: {
       title: "Landscape Change",
       intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
-      mapUrl: "https://gisat.github.io/slim-112-lulc-map/#6/-13.499/28.478",
+      mapUrl: "https://gisat.github.io/slim-112-lulc-map/#11/-15.4607/27.9242",
       dataDescription: (
         <>
           <p>The data presented here is derived from high resolution satellite imagery and processed using advanced machine learning algorithms. It delivers a detailed portrait of the landscape and its changes, capturing natural features, vegetation, and patterns of human activity with precision.</p>
@@ -354,7 +354,7 @@ export default function App() {
     floods: {
       title: "Floods",
       intro: "Flood mapping aims to improve preparedness and response by identifying communities and infrastructure at risk, supporting mitigation efforts and emergency planning. These risk assessments are primarily based on topographical models, such as the HAND model, and include historical flood data.",
-      mapUrl: "https://gisat.github.io/slim-121-floods-map/",
+      mapUrl: "https://gisat.github.io/slim-121-floods-map/#10/-15.7302/27.2639",
       dataDescription: (
         <>
           <p>The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
