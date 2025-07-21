@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // --- ICONS ---
 // Simple SVG icons for the activity tiles.
@@ -207,16 +207,34 @@ const ActivityPage = (props) => {
   const isWildfirePage = title === "Wildfires";
   
   const [isPanelOpen, setIsPanelOpen] = useState(true);
-  // Set the initial active tab only for the wildfire page.
   const [activeTab, setActiveTab] = useState(isWildfirePage ? props.tabs[0].id : null);
 
-  // Determine the content to display based on the page type (and tab if applicable)
+  // This effect synchronizes the activeTab state when navigating between pages.
+  useEffect(() => {
+    if (isWildfirePage) {
+      setActiveTab(props.tabs[0].id);
+    } else {
+      setActiveTab(null);
+    }
+  }, [isWildfirePage, props.tabs]);
+
+
   let currentContent;
   if (isWildfirePage) {
-    currentContent = props.maps[activeTab];
+    // Defensively select the active tab's content.
+    const currentTabId = activeTab || (props.tabs && props.tabs[0].id);
+    if (currentTabId) {
+        currentContent = props.maps[currentTabId];
+    }
   } else {
     currentContent = props;
   }
+  
+  // Prevent rendering if content is not yet available, avoiding the crash.
+  if (!currentContent) {
+    return null; 
+  }
+
   const { intro, mapUrl, dataDescription, dataInterpretation } = currentContent;
 
   // Chevron Icon for the collapse/expand button
@@ -318,12 +336,15 @@ export default function App() {
     landscapechange: {
       title: "Landscape Change",
       intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
-      mapUrl: "https://gisat.github.io/slim-112-landcover-map/#6/-13.499/28.478",
+      mapUrl: "https://gisat.github.io/slim-112-lulc-map/#6/-13.499/28.478",
       dataDescription: (
         <>
           <p>The data presented here is derived from high resolution satellite imagery and processed using advanced machine learning algorithms. It delivers a detailed portrait of the landscape and its changes, capturing natural features, vegetation, and patterns of human activity with precision.</p>
           <p className="mt-4">Land cover types were selected and validated with the active participation of Zambian public sector stakeholders to reflect their specific needs and use cases.</p>
           <p className="mt-4"><strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000–2024.</p>
+          <p className="mt-2"><strong>Ancillary data:</strong> Digital Elevation Model (DEM-SRTM), EO data derivatives like VIs</p>
+          <p className="mt-2"><strong>Training data:</strong> Existing Land Cover maps (SLIM Baseline 2023, WorldCover2020, WorldCover2021) and ancillary datasets including GlobalForestWatch, OpenStreetMap, WorldCereal, ZambiaWSF, GHSL, WorldWater, Hydro Zambia, and Global Wetlands.</p>
+          <p className="mt-4">The data was interpreted using a proprietary, state-of-the-art Machine Learning classification processing chain.</p>
         </>
       ),
       dataInterpretation: (
@@ -336,21 +357,30 @@ export default function App() {
       mapUrl: "https://gisat.github.io/slim-121-floods-map/",
       dataDescription: (
         <>
-            <p className="mt-2">The HAND (Height Above Nearest Drainage) model is based on the following data sources: DEM and river networks.</p>
-            <p className="mt-4">Other relevant inputs for flood analysis include GLOFAS, JRC Flood Map, and ESA WorldCover 2021.</p>
+          <p>The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
+          <p className="mt-2"><strong>DEM (Digital Elevation Model):</strong> SRTM (Shuttle Radar Topography Mission) data, approximately 30m resolution, was used.</p>
+          <p className="mt-2"><strong>Rivers:</strong> HydroATLAS Zambia data was used for river networks.</p>
+          <p className="mt-4">Flood analysis was prepared using the following inputs:</p>
+          <p className="mt-2"><strong>GLOFAS (Global Flood Awareness System):</strong> Long time series data (1980-2018, daily values) for approximating discharges in coarse resolution.</p>
+          <p className="mt-2"><strong>JRC Flood Map (Joint Research Centre):</strong> A map for a 100-year return period, valuable for estimating and validating expected flood extent.</p>
+          <p className="mt-2"><strong>ESA WorldCover 2021:</strong> Used for hydrological characteristics of watersheds based on land cover.</p>
         </>
       ),
       dataInterpretation: (
          <>
-         <p>Obstacles to using the data include river geometry limitation, lack of calibration & validation data, and the conceptual limitations of the HAND model.</p>
-        </>
+          <p>Obstacles to using this data include:</p>
+          <p className="mt-2"><strong>River geometry limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only</p>
+          <p className="mt-2"><strong>Calibration & validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</p>
+          <p className="mt-2"><strong>Data quality vs. availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</p>
+          <p className="mt-2"><strong>HAND limitations:</strong> HAND is a conceptual model, not a full hydrodynamic model, and does not consider factors like geological characteristics.</p>
+         </>
       )
     },
     wildfires: {
       title: "Wildfires",
       tabs: [
           { id: 'assessment', name: 'Assessment' },
-          { id: 'detected', name: 'Detected Fire Events' },
+          { id: 'detected', name: 'Fire Hazard' },
           { id: 'annual', name: 'Annual Overview' },
       ],
       maps: {
@@ -362,8 +392,15 @@ export default function App() {
           },
           detected: {
               mapUrl: "https://gisat.github.io/slim-122-wildfires-map/zambia_fire_S3_map_full.html",
-              intro: "This map shows active fire events as detected by satellite thermal hotspots.",
-              dataDescription: <p>This data integrates multiple sources, including near real-time satellite thermal hotspot detections from VIIRS and MODIS. The data shows the location of active fires within the last 24-48 hours.</p>,
+              intro: "This map analyzes fire assessment and hazard estimation within the Green Nexus area of Zambia using data from global fire monitoring services. It visualizes the spatial patterns and intensity of fires in 2024, contrasted with near real-time fire hotspots and the Fire Weather Index (FWI). A time-series chart compares daily fire event frequency between 2024 and 2023.",
+              dataDescription: (
+                <>
+                  <p>The data is sourced from and compared across three global fire services:</p>
+                  <p className="mt-2"><strong>FIRMS (Fire Information for Resource Management System):</strong> Provides near real-time active fire data from MODIS and VIIRS satellite instruments for immediate awareness.</p>
+                  <p className="mt-2"><strong>GWIS (Global Wildfire Information System):</strong> Offers a comprehensive view of fire regimes, including fire danger forecasts and historical analysis.</p>
+                  <p className="mt-2"><strong>S3 World Fire Atlas:</strong> An ESA project providing long-term global dataset of nighttime fire detections from Sentinel-3A for analyzing trends.</p>
+                </>
+              ),
               dataInterpretation: <p>Use this map for situational awareness of ongoing fire events. Note that cloud cover can obscure satellite detections.</p>
           },
           annual: {
