@@ -1,86 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-// --- ICONS ---
-// Simple SVG icons for the activity tiles.
-const LandscapeChangeIcon = () => (
-  <svg className="w-16 h-16 mb-4 text-green-600" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      {/* Pattern: Thin, dense horizontal lines */}
-      <pattern id="pattern-horizontal-dense" width="4" height="2" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="1" x2="4" y2="1" stroke="currentColor" strokeWidth="0.5" />
-      </pattern>
-    </defs>
-    
-    {/* Left half, filled with the pattern */}
-    <path
-      d="M12 2 A10 10 0 0 0 12 22 L12 2 Z"
-      fill="url(#pattern-horizontal-dense)"
-      stroke="none"
-    />
-    
-    {/* Right half, left empty */}
-    <path
-      d="M12 2 A10 10 0 0 1 12 22 L12 2 Z"
-      fill="none"
-      stroke="none"
-    />
-    
-    {/* Full circle outline on top */}
-    <circle cx="12" cy="12" r="10" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-
-const FloodsIcon = () => (
-    <svg className="w-16 h-16 mb-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        {/* House outline */}
-        <path
-            d="M4 10 L12 3 L20 10 V21 H4 Z"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-        {/* Four dense, straight horizontal lines inside the house */}
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 14 H 19" />
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 16 H 19" />
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 18 H 19" />
-        <path strokeWidth="0.5" strokeLinecap="round" d="M5 20 H 19" />
-    </svg>
-);
-
-
-const WildfiresIcon = () => (
-  <svg className="w-16 h-16 mb-4 text-red-600" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      {/* Pattern: Vertical lines with spacing matched to Landscape Change icon */}
-      <pattern id="pattern-vertical-wildfire-fixed" width="2" height="4" patternUnits="userSpaceOnUse">
-        <line x1="1" y1="0" x2="1" y2="4" stroke="currentColor" strokeWidth="0.5" />
-      </pattern>
-      {/* Clip path to only show the left half, extended by one line */}
-      <clipPath id="clip-left-half">
-        <rect x="0" y="0" width="14" height="24" />
-      </clipPath>
-    </defs>
-
-    {/* The full fire shape, but with the pattern only applied to the left half via clip-path */}
-    <path
-      d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14.5 5 16.5 8 16.5 10c0-1.995.189-4.418 2.48-6.082A8.001 8.001 0 0117.657 18.657z"
-      fill="url(#pattern-vertical-wildfire-fixed)"
-      clipPath="url(#clip-left-half)"
-      stroke="none"
-    />
-
-    {/* The fire outline on top, with no fill, covering the whole shape */}
-    <path
-      d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14.5 5 16.5 8 16.5 10c0-1.995.189-4.418 2.48-6.082A8.001 8.001 0 0117.657 18.657z"
-      fill="none"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
+import { LandPlot, Waves, Flame } from 'lucide-react';
 
 // --- HEADER COMPONENT ---
 // This is the navigation bar that appears on every page.
@@ -168,7 +87,7 @@ const HomePage = ({ setPage }) => {
               className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               onClick={() => setPage('landscapechange')}
             >
-              <LandscapeChangeIcon />
+              <LandPlot className="w-16 h-16 mb-4 text-green-600" />
               <h3 className="text-2xl font-bold text-gray-900">Landscape Change</h3>
               <p className="mt-2 text-gray-600">Explore land cover and land cover flows in detail</p>
             </div>
@@ -178,7 +97,7 @@ const HomePage = ({ setPage }) => {
               className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               onClick={() => setPage('floods')}
             >
-              <FloodsIcon />
+              <Waves className="w-16 h-16 mb-4 text-blue-600" />
               <h3 className="text-2xl font-bold text-gray-900">Floods</h3>
               <p className="mt-2 text-gray-600">View maps of flood-prone areas and historical inundation events.</p>
             </div>
@@ -188,7 +107,7 @@ const HomePage = ({ setPage }) => {
               className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               onClick={() => setPage('wildfires')}
             >
-              <WildfiresIcon />
+              <Flame className="w-16 h-16 mb-4 text-red-600" />
               <h3 className="text-2xl font-bold text-gray-900">Wildfires</h3>
               <p className="mt-2 text-gray-600">Explore wildfire risk, historical burn scars and active fire data</p>
             </div>
@@ -203,7 +122,7 @@ const HomePage = ({ setPage }) => {
 // This component now features a full-screen map with a collapsible info panel.
 // It also handles tabbed content for the Wildfires page.
 const ActivityPage = (props) => {
-  const { title } = props;
+  const { title, icon: Icon, iconColor } = props;
   const isWildfirePage = title === "Wildfires";
   
   const [isPanelOpen, setIsPanelOpen] = useState(true);
@@ -254,7 +173,10 @@ const ActivityPage = (props) => {
 
       <div className={`absolute top-4 left-4 z-10 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg shadow-xl transition-all duration-300 ease-in-out max-w-md w-5/6 sm:w-11/12`}>
         <div className="flex justify-between items-center p-4 cursor-pointer" onClick={() => setIsPanelOpen(!isPanelOpen)}>
-            <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              {Icon && <Icon className={`w-6 h-6 mr-3 ${iconColor}`} />}
+              {title}
+            </h2>
             <button
                 className="p-2 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 aria-expanded={isPanelOpen}
@@ -335,6 +257,8 @@ export default function App() {
   const pageData = {
     landscapechange: {
       title: "Landscape Change",
+      icon: LandPlot,
+      iconColor: "text-green-600",
       intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
       mapUrl: "https://gisat.github.io/slim-112-lulc-map/#11/-15.4607/27.9242",
       dataDescription: (
@@ -353,6 +277,8 @@ export default function App() {
     },
     floods: {
       title: "Floods",
+      icon: Waves,
+      iconColor: "text-blue-600",
       intro: "Flood mapping aims to improve preparedness and response by identifying communities and infrastructure at risk, supporting mitigation efforts and emergency planning. These risk assessments are primarily based on topographical models, such as the HAND model, and include historical flood data.",
       mapUrl: "https://gisat.github.io/slim-121-floods-map/#10/-15.7302/27.2639",
       dataDescription: (
@@ -378,6 +304,8 @@ export default function App() {
     },
     wildfires: {
       title: "Wildfires",
+      icon: Flame,
+      iconColor: "text-red-600",
       tabs: [
           { id: 'assessment', name: 'Assessment' },
           { id: 'detected', name: 'Fire Hazard' },
@@ -439,3 +367,4 @@ export default function App() {
     </div>
   );
 }
+
