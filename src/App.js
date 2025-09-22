@@ -62,29 +62,28 @@ const Header = ({ currentPage, setPage }) => {
 // --- HOME PAGE COMPONENT (REVISED) ---
 const HomePage = ({ setPage }) => {
   return (
-    <>
-      {/* Hero Section */}
-      <div 
-        className="relative bg-cover bg-center text-center text-white" 
-        style={{ backgroundImage: "url('slim_portal_banner.png')" }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+    <div 
+      className="bg-cover bg-center" 
+      style={{ backgroundImage: "url('slim_portal_banner.png')" }}
+    >
+      {/* Hero Section Content */}
+      <div className="pt-20 pb-16 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 
             className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl"
-            style={{textShadow: '2px 2px 4px rgba(0,0,0,0.6)'}}
+            style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}
           >
             SLIM Project Online Maps
           </h2>
           <p 
             className="mt-6 max-w-3xl mx-auto text-xl text-gray-200"
-            style={{textShadow: '1px 1px 3px rgba(0,0,0,0.7)'}}
+            style={{textShadow: '1px 1px 3px rgba(0,0,0,0.9)'}}
           >
             The SLIM (Sustainable Landscape through Integrated Management) project aims to build institutional capacity in Zambia for effective landscape management and natural disaster preparedness through the use of geospatial data.
           </p>
           <p 
             className="mt-4 max-w-3xl mx-auto text-lg text-gray-300"
-            style={{textShadow: '1px 1px 3px rgba(0,0,0,0.7)'}}
+            style={{textShadow: '1px 1px 3px rgba(0,0,0,0.9)'}}
             >
             Explore maps in three thematic areas: Landscape Change, Floods, and Wildfires
           </p>
@@ -92,42 +91,40 @@ const HomePage = ({ setPage }) => {
       </div>
 
       {/* Activity Tiles Section */}
-      <div className="bg-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-          <div className="grid gap-8 md:grid-cols-3">
-            {/* Landscape Change Tile */}
-            <div 
-              className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              onClick={() => setPage('landscapechange')}
-            >
-              <LandPlot className="w-16 h-16 mb-4 text-green-600" />
-              <h3 className="text-2xl font-bold text-gray-900">Landscape Change</h3>
-              <p className="mt-2 text-gray-600">Explore land cover and land cover flows in detail</p>
-            </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* Landscape Change Tile */}
+          <div 
+            className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            onClick={() => setPage('landscapechange')}
+          >
+            <LandPlot className="w-16 h-16 mb-4 text-green-600" />
+            <h3 className="text-2xl font-bold text-gray-900">Landscape Change</h3>
+            <p className="mt-2 text-gray-600">Explore land cover and land cover flows in detail</p>
+          </div>
 
-            {/* Floods Tile */}
-            <div 
-              className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              onClick={() => setPage('floods')}
-            >
-              <Waves className="w-16 h-16 mb-4 text-blue-600" />
-              <h3 className="text-2xl font-bold text-gray-900">Floods</h3>
-              <p className="mt-2 text-gray-600">View maps of flood-prone areas and historical inundation events.</p>
-            </div>
+          {/* Floods Tile */}
+          <div 
+            className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            onClick={() => setPage('floods')}
+          >
+            <Waves className="w-16 h-16 mb-4 text-blue-600" />
+            <h3 className="text-2xl font-bold text-gray-900">Floods</h3>
+            <p className="mt-2 text-gray-600">View maps of flood-prone areas and historical inundation events.</p>
+          </div>
 
-            {/* Wildfires Tile */}
-            <div 
-              className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              onClick={() => setPage('wildfires')}
-            >
-              <Flame className="w-16 h-16 mb-4 text-red-600" />
-              <h3 className="text-2xl font-bold text-gray-900">Wildfires</h3>
-              <p className="mt-2 text-gray-600">Explore wildfire risk, historical burn scars and active fire data</p>
-            </div>
+          {/* Wildfires Tile */}
+          <div 
+            className="bg-white rounded-lg shadow-lg p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            onClick={() => setPage('wildfires')}
+          >
+            <Flame className="w-16 h-16 mb-4 text-red-600" />
+            <h3 className="text-2xl font-bold text-gray-900">Wildfires</h3>
+            <p className="mt-2 text-gray-600">Explore wildfire risk, historical burn scars and active fire data</p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
