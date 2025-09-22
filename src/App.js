@@ -64,15 +64,28 @@ const HomePage = ({ setPage }) => {
   return (
     <>
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-green-50 via-blue-50 to-gray-100 pt-20 pb-16 text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+      <div 
+        className="relative bg-cover bg-center text-center text-white" 
+        style={{ backgroundImage: "url('slim_portal_banner.png')" }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+          <h2 
+            className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl"
+            style={{textShadow: '2px 2px 4px rgba(0,0,0,0.6)'}}
+          >
             SLIM Project Online Maps
           </h2>
-          <p className="mt-6 max-w-3xl mx-auto text-xl text-gray-700">
+          <p 
+            className="mt-6 max-w-3xl mx-auto text-xl text-gray-200"
+            style={{textShadow: '1px 1px 3px rgba(0,0,0,0.7)'}}
+          >
             The SLIM (Sustainable Landscape through Integrated Management) project aims to build institutional capacity in Zambia for effective landscape management and natural disaster preparedness through the use of geospatial data.
           </p>
-          <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+          <p 
+            className="mt-4 max-w-3xl mx-auto text-lg text-gray-300"
+            style={{textShadow: '1px 1px 3px rgba(0,0,0,0.7)'}}
+            >
             Explore maps in three thematic areas: Landscape Change, Floods, and Wildfires
           </p>
         </div>
@@ -80,7 +93,7 @@ const HomePage = ({ setPage }) => {
 
       {/* Activity Tiles Section */}
       <div className="bg-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
           <div className="grid gap-8 md:grid-cols-3">
             {/* Landscape Change Tile */}
             <div 
