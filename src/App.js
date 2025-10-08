@@ -241,21 +241,34 @@ const ActivityPage = (props) => {
 
 // --- FOOTER COMPONENT ---
 const Footer = ({ currentPage }) => {
-    return (
-        <footer className="bg-gray-800 text-gray-400 text-sm">
-            <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
-                {currentPage === 'home' && (
-                  <div className="mb-4">
-                    <p className="mb-2">Funded by:</p>
-                    <img className="h-10 inline-block" src="CzechAid_basic_frame_sanitized.png" alt="Czech Aid Logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/120x40/ccc/000?text=Logo'; }}/>
+  return (
+      <footer className="bg-gray-800 text-gray-400 text-sm">
+          <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8">
+              {currentPage === 'home' && (
+                <div className="flex flex-col md:flex-row justify-center items-start gap-8 md:gap-16">
+                  {/* Funded by Section */}
+                  <div className="text-center mx-auto">
+                    <p className="mb-2 font-semibold">Funded by</p>
+                    <div className="flex items-center justify-center gap-4">
+                       <img className="h-12 w-auto" src="EN Co-funded by the EU_POS.jpg" alt="Co-funded by the European Union logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/200x50/ccc/000?text=EU+Logo'; }}/>
+                       <img className="h-12 w-auto rounded-sm shadow-md" style={{aspectRatio: '3/2'}} src="https://flagcdn.com/cz.svg" alt="Flag of Czechia" />
+                      <img className="h-12 w-auto rounded-sm shadow-md" style={{aspectRatio: '16/10'}} src="https://flagcdn.com/se.svg" alt="Flag of Sweden" />
+                    </div>
                   </div>
-                )}
-                <p>
-                    &copy; 2025 SLIM Project. All Rights Reserved.
-                </p>
-            </div>
-        </footer>
-    );
+
+                  {/* Implemented by Section */}
+                  <div className="text-center mx-auto">
+                    <p className="mb-2 font-semibold">Implemented by</p>
+                    <img className="h-12 inline-block" src="CzechAid_basic_frame_sanitized.png" alt="Czech Aid Logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/120x40/ccc/000?text=Logo'; }}/>
+                  </div>
+                </div>
+              )}
+              <p className="mt-6 text-center">
+                  &copy; {new Date().getFullYear()} SLIM Project. All Rights Reserved.
+              </p>
+          </div>
+      </footer>
+  );
 }
 
 
