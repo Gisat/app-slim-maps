@@ -245,9 +245,9 @@ const Footer = ({ currentPage }) => {
       <footer className="bg-gray-800 text-gray-400 text-sm">
           <div className="container mx-auto py-6 px-4 sm:px-6 lg:px-8">
               {currentPage === 'home' && (
-                <div className="flex flex-col md:flex-row justify-center items-start gap-8 md:gap-16">
+                <div className="flex flex-col md:flex-row justify-center items-start gap-8 md:gap-12">
                   {/* Funded by Section */}
-                  <div className="text-center mx-auto">
+                  <div className="text-center">
                     <p className="mb-2 font-semibold">Funded by</p>
                     <div className="flex items-center justify-center gap-4">
                        <img className="h-12 w-auto" src="EN Co-funded by the EU_POS.jpg" alt="Co-funded by the European Union logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/200x50/ccc/000?text=EU+Logo'; }}/>
@@ -257,7 +257,7 @@ const Footer = ({ currentPage }) => {
                   </div>
 
                   {/* Implemented by Section */}
-                  <div className="text-center mx-auto">
+                  <div className="text-center">
                     <p className="mb-2 font-semibold">Implemented by</p>
                     <img className="h-12 inline-block" src="CzechAid_basic_frame_sanitized.png" alt="Czech Aid Logo" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/120x40/ccc/000?text=Logo'; }}/>
                   </div>
