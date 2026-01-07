@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/app-slim-maps/static/css/main.608da09d.css",
-    "main.js": "/app-slim-maps/static/js/main.2177c4f4.js",
+    "main.css": "/app-slim-maps/static/css/main.ecb6123c.css",
+    "main.js": "/app-slim-maps/static/js/main.28aa2aec.js",
     "static/js/453.90053867.chunk.js": "/app-slim-maps/static/js/453.90053867.chunk.js",
     "index.html": "/app-slim-maps/index.html",
-    "main.608da09d.css.map": "/app-slim-maps/static/css/main.608da09d.css.map",
-    "main.2177c4f4.js.map": "/app-slim-maps/static/js/main.2177c4f4.js.map",
+    "main.ecb6123c.css.map": "/app-slim-maps/static/css/main.ecb6123c.css.map",
+    "main.28aa2aec.js.map": "/app-slim-maps/static/js/main.28aa2aec.js.map",
     "453.90053867.chunk.js.map": "/app-slim-maps/static/js/453.90053867.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.608da09d.css",
-    "static/js/main.2177c4f4.js"
+    "static/css/main.ecb6123c.css",
+    "static/js/main.28aa2aec.js"
   ]
 }
