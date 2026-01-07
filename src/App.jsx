@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { LandPlot, Waves, Flame, Menu, X } from 'lucide-react';
 
+// --- HELPER COMPONENTS ---
+
+const ChevronIcon = ({ isOpen }) => (
+  <svg 
+    className={`w-6 h-6 text-gray-700 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+  </svg>
+);
+
 // --- HEADER COMPONENT ---
 const Header = ({ currentPage, setPage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,7 +39,7 @@ const Header = ({ currentPage, setPage }) => {
               <img 
                 className="h-10 w-auto" 
                 src="SLIM_logo.png" 
-                alt="SLIM" 
+                alt="SLIM Logo" 
                 onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/100x40/f3f4f6/374151?text=SLIM+Logo'; }} 
               />
               <span className="ml-3 text-xl font-bold text-gray-800 hidden sm:block">Maps</span>
@@ -107,10 +121,11 @@ const HomePage = ({ setPage }) => {
           minHeight: "60vh"
         }}
       >
-        {/* Fallback for bg image if local file fails */}
+        {/* Fallback for bg image if local file fails - Added alt tag to fix build error */}
         <img 
             src="slim_portal_banner.png" 
             className="hidden" 
+            alt="Banner Background"
             onError={(e) => { 
                 e.target.parentElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=2074')";
             }} 
@@ -202,7 +217,7 @@ const ActivityPage = (props) => {
     } else {
       setActiveTab(null);
     }
-  }, [isWildfirePage, props.tabs]); // Added props.tabs to dependency array
+  }, [isWildfirePage, props.tabs]); 
 
   let currentContent = props;
   if (isWildfirePage) {
@@ -224,10 +239,6 @@ const ActivityPage = (props) => {
   }
 
   const { intro, mapUrl, dataDescription, dataInterpretation } = currentContent;
-
-  const ChevronIcon = ({ isOpen }) => (
-    <svg className={`w-6 h-6 text-gray-700 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-  );
 
   return (
     <div className="relative w-full h-[calc(100vh-4rem)] bg-gray-200 overflow-hidden">
