@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LandPlot, Waves, Flame, Menu, X } from 'lucide-react';
+import { LandPlot, Waves, Flame, Menu, X, Sun } from 'lucide-react';
 
 // --- HELPER COMPONENTS ---
 
@@ -24,6 +24,7 @@ const Header = ({ currentPage, setPage }) => {
     { id: 'landscapechange', title: 'Landscape Change' },
     { id: 'floods', title: 'Floods' },
     { id: 'wildfires', title: 'Wildfires' },
+    { id: 'drought', title: 'Drought' },
   ];
 
   return (
@@ -147,7 +148,7 @@ const HomePage = ({ setPage }) => {
             <p 
               className="mt-8 max-w-3xl mx-auto text-lg text-blue-100 font-medium drop-shadow-md"
             >
-              Explore maps in three thematic areas: Landscape Change, Floods, and Wildfires
+              Explore maps in four thematic areas: Landscape Change, Floods, Wildfires, and Drought.
             </p>
           </div>
         </div>
@@ -156,7 +157,7 @@ const HomePage = ({ setPage }) => {
       {/* Activity Tiles Section */}
       <div className="bg-gray-50 py-16 flex-grow">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
             {/* Landscape Change Tile */}
             <div 
               className="bg-white rounded-xl shadow-md p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
@@ -194,6 +195,19 @@ const HomePage = ({ setPage }) => {
               <h3 className="text-2xl font-bold text-gray-900">Wildfires</h3>
               <p className="mt-3 text-gray-600 leading-relaxed">Explore wildfire risk, historical burn scars and active fire data for effective response.</p>
               <span className="mt-6 text-red-600 font-semibold hover:underline">View Map &rarr;</span>
+            </div>
+
+            {/* Drought Tile */}
+            <div 
+              className="bg-white rounded-xl shadow-md p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
+              onClick={() => setPage('drought')}
+            >
+              <div className="bg-orange-100 p-4 rounded-full mb-6">
+                <Sun className="w-10 h-10 text-orange-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Drought</h3>
+              <p className="mt-3 text-gray-600 leading-relaxed">Monitor drought conditions and anomaly frequency to support agricultural planning.</p>
+              <span className="mt-6 text-orange-600 font-semibold hover:underline">View Map &rarr;</span>
             </div>
           </div>
         </div>
@@ -474,6 +488,33 @@ export default function App() {
               dataInterpretation: <p>The historical burn scar data can help in understanding fire frequency, ecosystem response, and long-term fire regime patterns.</p>
           }
       }
+    },
+    drought: {
+      title: "Drought",
+      icon: Sun,
+      iconColor: "text-orange-600",
+      intro: "This map provides critical insights into drought conditions, helping to identify areas experiencing water deficits and supporting early warning systems for food security.",
+      mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AnomalyFreq.html#8/-15.290/27.804",
+      dataDescription: (
+        <div className="space-y-3">
+          <p>The drought monitoring data leverages satellite-based indices to track precipitation anomalies and vegetation health over time.</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Data Source:</strong> Satellite precipitation estimates (e.g., CHIRPS) and vegetation indices (NDVI).</li>
+            <li><strong>Methodology:</strong> Comparison of current conditions against long-term historical averages to calculate anomalies.</li>
+            <li><strong>Key Metrics:</strong> Drought Anomaly Frequency and severity indices.</li>
+          </ul>
+        </div>
+      ),
+      dataInterpretation: (
+         <div className="space-y-3">
+          <p>Understanding drought patterns allows for:</p>
+          <ul className="list-disc pl-5 space-y-1">
+            <li><strong>Early Warning:</strong> Identifying potential crop failures before they occur.</li>
+            <li><strong>Resource Allocation:</strong> Directing aid and water resources to the most affected regions.</li>
+            <li><strong>Long-term Planning:</strong> Adapting agricultural practices to changing climate patterns.</li>
+          </ul>
+         </div>
+      )
     }
   };
 
@@ -485,6 +526,8 @@ export default function App() {
         return <ActivityPage {...pageData.floods} />;
       case 'wildfires':
         return <ActivityPage {...pageData.wildfires} />;
+      case 'drought':
+        return <ActivityPage {...pageData.drought} />;
       case 'home':
       default:
         return <HomePage setPage={setPage} />;
