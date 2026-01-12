@@ -218,22 +218,22 @@ const HomePage = ({ setPage }) => {
 // --- ACTIVITY PAGE COMPONENT ---
 const ActivityPage = (props) => {
   const { title, icon: Icon, iconColor } = props;
-  const isWildfirePage = title === "Wildfires";
+  const hasTabs = !!(props.tabs && props.tabs.length > 0);
   
   const [isPanelOpen, setIsPanelOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState(isWildfirePage && props.tabs ? props.tabs[0].id : null);
+  const [activeTab, setActiveTab] = useState(hasTabs ? props.tabs[0].id : null);
 
   // Synchronize activeTab state when props change
   useEffect(() => {
-    if (isWildfirePage && props.tabs) {
+    if (hasTabs) {
       setActiveTab(props.tabs[0].id);
     } else {
       setActiveTab(null);
     }
-  }, [isWildfirePage, props.tabs]); 
+  }, [hasTabs, props.tabs]); 
 
   let currentContent = props;
-  if (isWildfirePage) {
+  if (hasTabs) {
     const currentTabId = activeTab || (props.tabs && props.tabs[0].id);
     if (currentTabId && props.maps) {
         currentContent = props.maps[currentTabId];
@@ -289,8 +289,8 @@ const ActivityPage = (props) => {
         {/* Panel Content */}
         <div className={`transition-all duration-500 ease-in-out overflow-hidden flex flex-col ${isPanelOpen ? 'opacity-100' : 'opacity-0'}`}>
             <div className="px-5 pb-6 overflow-y-auto custom-scrollbar">
-                {/* Tabs for Wildfire Page */}
-                {isWildfirePage && props.tabs && (
+                {/* Tabs */}
+                {hasTabs && (
                     <div className="border-b border-gray-200 mb-5 sticky top-0 bg-white/95 backdrop-blur-sm pt-1 z-10">
                         <nav className="-mb-px flex space-x-1" aria-label="Tabs">
                             {props.tabs.map((tab) => (
@@ -492,28 +492,55 @@ export default function App() {
       title: "Drought",
       icon: Sun,
       iconColor: "text-orange-600",
-      intro: "This map provides critical insights into drought conditions, helping to identify areas experiencing water deficits and supporting early warning systems for food security.",
-      mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AnomalyFreq.html#8/-15.290/27.804",
-      dataDescription: (
-        <div className="space-y-3">
-          <p>The drought monitoring data leverages satellite-based indices to track precipitation anomalies and vegetation health over time.</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Data Source:</strong> Satellite precipitation estimates (e.g., CHIRPS) and vegetation indices (NDVI).</li>
-            <li><strong>Methodology:</strong> Comparison of current conditions against long-term historical averages to calculate anomalies.</li>
-            <li><strong>Key Metrics:</strong> Drought Anomaly Frequency and severity indices.</li>
-          </ul>
-        </div>
-      ),
-      dataInterpretation: (
-         <div className="space-y-3">
-          <p>Understanding drought patterns allows for:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Early Warning:</strong> Identifying potential crop failures before they occur.</li>
-            <li><strong>Resource Allocation:</strong> Directing aid and water resources to the most affected regions.</li>
-            <li><strong>Long-term Planning:</strong> Adapting agricultural practices to changing climate patterns.</li>
-          </ul>
-         </div>
-      )
+      tabs: [
+          { id: 'anomaly', name: 'Anomaly Frequency' },
+          { id: 'impact', name: 'Impact Warning' },
+      ],
+      maps: {
+          anomaly: {
+              intro: "This map provides critical insights into drought conditions, helping to identify areas experiencing water deficits and supporting early warning systems for food security.",
+              mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AnomalyFreq.html#8/-15.290/27.804",
+              dataDescription: (
+                <div className="space-y-3">
+                  <p>The drought monitoring data leverages satellite-based indices to track precipitation anomalies and vegetation health over time.</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>Data Source:</strong> Satellite precipitation estimates (e.g., CHIRPS) and vegetation indices (NDVI).</li>
+                    <li><strong>Methodology:</strong> Comparison of current conditions against long-term historical averages to calculate anomalies.</li>
+                    <li><strong>Key Metrics:</strong> Drought Anomaly Frequency and severity indices.</li>
+                  </ul>
+                </div>
+              ),
+              dataInterpretation: (
+                 <div className="space-y-3">
+                  <p>Understanding drought patterns allows for:</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>Early Warning:</strong> Identifying potential crop failures before they occur.</li>
+                    <li><strong>Resource Allocation:</strong> Directing aid and water resources to the most affected regions.</li>
+                    <li><strong>Long-term Planning:</strong> Adapting agricultural practices to changing climate patterns.</li>
+                  </ul>
+                 </div>
+              )
+          },
+          impact: {
+              intro: "The Drought Impact Warning map integrates productivity indicators to highlight areas where agricultural output is currently threatened by water deficits.",
+              mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_ImpactWarn.html",
+              dataDescription: (
+                  <div className="space-y-3">
+                      <p>This map displays multiple indicators related to agricultural productivity and drought impact:</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Absolute Productivity:</strong> Estimated biomass production.</li>
+                        <li><strong>Long-Term Average:</strong> Historical baseline for comparison.</li>
+                        <li><strong>Relative to Average/Maximum:</strong> Productivity anomalies indicating potential yield reduction.</li>
+                      </ul>
+                  </div>
+              ),
+              dataInterpretation: (
+                  <div className="space-y-3">
+                      <p>Use this tool to identify specific areas where current productivity significantly deviates from the historical norm, indicating a high risk of drought impact on food security.</p>
+                  </div>
+              )
+          }
+      }
     }
   };
 
