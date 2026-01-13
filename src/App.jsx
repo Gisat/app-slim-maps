@@ -495,6 +495,7 @@ export default function App() {
       tabs: [
           { id: 'anomaly', name: 'Anomaly Frequency' },
           { id: 'impact', name: 'Impact Warning' },
+          { id: 'aggregated', name: 'Aggregated Maps' },
       ],
       maps: {
           anomaly: {
@@ -537,6 +538,26 @@ export default function App() {
               dataInterpretation: (
                   <div className="space-y-3">
                       <p>Use this tool to identify specific areas where current productivity significantly deviates from the historical norm, indicating a high risk of drought impact on food security.</p>
+                  </div>
+              )
+          },
+          aggregated: {
+              intro: "This map provides aggregated drought visualizations across different seasonal periods (Hot-Dry, Wet, Cold-Dry) and annual cycles, allowing for a comprehensive assessment of drought persistence and seasonal variability.",
+              mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AggregMaps.html",
+              dataDescription: (
+                  <div className="space-y-3">
+                      <p>The aggregated maps visualize drought conditions derived from normalized indices over specific timeframes:</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>365 Days:</strong> Annual overview.</li>
+                        <li><strong>Hot-Dry Season:</strong> September to October.</li>
+                        <li><strong>Wet Season:</strong> November to April.</li>
+                        <li><strong>Cold-Dry Season:</strong> May to August.</li>
+                      </ul>
+                  </div>
+              ),
+              dataInterpretation: (
+                  <div className="space-y-3">
+                      <p>Select specific seasons to analyze how drought conditions evolve throughout the year. The transparency slider allows for overlaying these aggregated layers with other contextual information.</p>
                   </div>
               )
           }
