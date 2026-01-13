@@ -267,7 +267,7 @@ const ActivityPage = (props) => {
       {/* Info Panel */}
       <div 
         className={`absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl transition-all duration-500 ease-in-out border border-gray-200 flex flex-col
-        ${isPanelOpen ? 'max-h-[85vh] w-[90vw] sm:w-[28rem]' : 'max-h-[4.5rem] w-[14rem]'}`}
+        ${isPanelOpen ? 'max-h-[85vh] w-[90vw] sm:w-[32rem]' : 'max-h-[4.5rem] w-[14rem]'}`}
       >
         {/* Panel Header */}
         <div 
