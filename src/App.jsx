@@ -133,81 +133,81 @@ const HomePage = ({ setPage }) => {
         />
 
         <div className="relative z-10 max-w-lg mx-auto lg:mx-0 text-center lg:text-left">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight drop-shadow-lg mb-6">
+          <h2 className="text-3xl sm:text-4xl 2xl:text-5xl font-extrabold tracking-tight drop-shadow-lg mb-4 2xl:mb-6">
             SLIM Project<br/>Online Maps
           </h2>
-          {/* Changed accent line to orange */}
-          <div className="w-20 h-1 bg-orange-500 mb-6 mx-auto lg:mx-0"></div>
-          <p className="text-lg lg:text-xl text-gray-100 drop-shadow-md leading-relaxed mb-6">
+          <div className="w-20 h-1 bg-orange-500 mb-4 2xl:mb-6 mx-auto lg:mx-0"></div>
+          <p className="text-base lg:text-lg 2xl:text-xl text-gray-100 drop-shadow-md leading-relaxed mb-4 2xl:mb-6">
             The SLIM (Sustainable Landscape through Integrated Management) project aims to build institutional capacity in Zambia for effective landscape management and natural disaster preparedness through the use of geospatial data.
           </p>
-          <p className="text-base lg:text-lg text-blue-200 font-medium drop-shadow-md">
+          <p className="text-sm lg:text-base 2xl:text-lg text-blue-200 font-medium drop-shadow-md">
             Explore maps in four thematic areas: Landscape Change, Floods, Wildfires, and Drought.
           </p>
         </div>
       </div>
 
       {/* Right Column: Maps Grid */}
-      <div className="lg:w-7/12 bg-gray-50 p-6 lg:p-10 flex flex-col justify-center">
-        <div className="grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto w-full h-full">
+      <div className="lg:w-7/12 bg-gray-50 p-4 lg:p-8 2xl:p-10 flex flex-col justify-center">
+        {/* Adjusted breakpoints for spacing and max-width to better fit smaller laptops */}
+        <div className="grid gap-4 xl:gap-6 2xl:gap-8 sm:grid-cols-2 max-w-4xl 2xl:max-w-5xl mx-auto w-full h-full">
             {/* Landscape Change Tile */}
             <div 
-              className="group bg-white rounded-xl shadow-md p-6 lg:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
+              className="group bg-white rounded-xl shadow-md p-4 lg:p-5 2xl:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
               onClick={() => setPage('landscapechange')}
             >
               <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="bg-green-50 p-3 lg:p-6 rounded-full mb-4 lg:mb-6 group-hover:bg-green-100 transition-colors">
-                  <LandPlot className="w-8 h-8 lg:w-16 lg:h-16 text-green-600" />
+                <div className="bg-green-50 p-3 lg:p-4 2xl:p-6 rounded-full mb-3 lg:mb-4 2xl:mb-6 group-hover:bg-green-100 transition-colors">
+                  <LandPlot className="w-8 h-8 lg:w-10 lg:h-10 2xl:w-16 2xl:h-16 text-green-600" />
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2 lg:mb-3">Landscape Change</h3>
-                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">Explore land cover and land cover flows in detail to understand environmental shifts.</p>
+                <h3 className="text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-3">Landscape Change</h3>
+                <p className="text-xs lg:text-sm 2xl:text-base text-gray-600 leading-relaxed">Explore land cover and land cover flows in detail to understand environmental shifts.</p>
               </div>
-              <span className="mt-4 lg:mt-6 text-sm lg:text-base font-semibold text-green-600 group-hover:text-green-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
+              <span className="mt-3 lg:mt-4 2xl:mt-6 text-sm 2xl:text-base font-semibold text-green-600 group-hover:text-green-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
             </div>
 
             {/* Floods Tile */}
             <div 
-              className="group bg-white rounded-xl shadow-md p-6 lg:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
+              className="group bg-white rounded-xl shadow-md p-4 lg:p-5 2xl:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
               onClick={() => setPage('floods')}
             >
                <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="bg-blue-50 p-3 lg:p-6 rounded-full mb-4 lg:mb-6 group-hover:bg-blue-100 transition-colors">
-                  <Waves className="w-8 h-8 lg:w-16 lg:h-16 text-blue-600" />
+                <div className="bg-blue-50 p-3 lg:p-4 2xl:p-6 rounded-full mb-3 lg:mb-4 2xl:mb-6 group-hover:bg-blue-100 transition-colors">
+                  <Waves className="w-8 h-8 lg:w-10 lg:h-10 2xl:w-16 2xl:h-16 text-blue-600" />
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2 lg:mb-3">Floods</h3>
-                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">View maps of flood-prone areas and historical inundation events for better preparedness.</p>
+                <h3 className="text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-3">Floods</h3>
+                <p className="text-xs lg:text-sm 2xl:text-base text-gray-600 leading-relaxed">View maps of flood-prone areas and historical inundation events for better preparedness.</p>
               </div>
-              <span className="mt-4 lg:mt-6 text-sm lg:text-base font-semibold text-blue-600 group-hover:text-blue-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
+              <span className="mt-3 lg:mt-4 2xl:mt-6 text-sm 2xl:text-base font-semibold text-blue-600 group-hover:text-blue-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
             </div>
 
             {/* Wildfires Tile */}
             <div 
-              className="group bg-white rounded-xl shadow-md p-6 lg:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
+              className="group bg-white rounded-xl shadow-md p-4 lg:p-5 2xl:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
               onClick={() => setPage('wildfires')}
             >
                <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="bg-red-50 p-3 lg:p-6 rounded-full mb-4 lg:mb-6 group-hover:bg-red-100 transition-colors">
-                  <Flame className="w-8 h-8 lg:w-16 lg:h-16 text-red-600" />
+                <div className="bg-red-50 p-3 lg:p-4 2xl:p-6 rounded-full mb-3 lg:mb-4 2xl:mb-6 group-hover:bg-red-100 transition-colors">
+                  <Flame className="w-8 h-8 lg:w-10 lg:h-10 2xl:w-16 2xl:h-16 text-red-600" />
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2 lg:mb-3">Wildfires</h3>
-                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">Explore wildfire risk, historical burn scars and active fire data for effective response.</p>
+                <h3 className="text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-3">Wildfires</h3>
+                <p className="text-xs lg:text-sm 2xl:text-base text-gray-600 leading-relaxed">Explore wildfire risk, historical burn scars and active fire data for effective response.</p>
               </div>
-              <span className="mt-4 lg:mt-6 text-sm lg:text-base font-semibold text-red-600 group-hover:text-red-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
+              <span className="mt-3 lg:mt-4 2xl:mt-6 text-sm 2xl:text-base font-semibold text-red-600 group-hover:text-red-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
             </div>
 
             {/* Drought Tile */}
             <div 
-              className="group bg-white rounded-xl shadow-md p-6 lg:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
+              className="group bg-white rounded-xl shadow-md p-4 lg:p-5 2xl:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
               onClick={() => setPage('drought')}
             >
                <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="bg-orange-50 p-3 lg:p-6 rounded-full mb-4 lg:mb-6 group-hover:bg-orange-100 transition-colors">
-                  <Sun className="w-8 h-8 lg:w-16 lg:h-16 text-orange-600" />
+                <div className="bg-orange-50 p-3 lg:p-4 2xl:p-6 rounded-full mb-3 lg:mb-4 2xl:mb-6 group-hover:bg-orange-100 transition-colors">
+                  <Sun className="w-8 h-8 lg:w-10 lg:h-10 2xl:w-16 2xl:h-16 text-orange-600" />
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2 lg:mb-3">Drought</h3>
-                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">Monitor drought conditions and anomaly frequency to support agricultural planning.</p>
+                <h3 className="text-lg lg:text-xl 2xl:text-2xl font-bold text-gray-900 mb-2 2xl:mb-3">Drought</h3>
+                <p className="text-xs lg:text-sm 2xl:text-base text-gray-600 leading-relaxed">Monitor drought conditions and anomaly frequency to support agricultural planning.</p>
               </div>
-              <span className="mt-4 lg:mt-6 text-sm lg:text-base font-semibold text-orange-600 group-hover:text-orange-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
+              <span className="mt-3 lg:mt-4 2xl:mt-6 text-sm 2xl:text-base font-semibold text-orange-600 group-hover:text-orange-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
             </div>
         </div>
       </div>
@@ -384,12 +384,38 @@ const Footer = ({ currentPage }) => {
   );
 }
 
+// --- VALID PAGES DEFINITION FOR ROUTING ---
+const VALID_PAGES = ['home', 'landscapechange', 'floods', 'wildfires', 'drought'];
+
 // --- MAIN APP COMPONENT ---
 export default function App() {
-  const [currentPage, setPage] = useState('home');
+  
+  // Initialize state based on the current URL hash
+  const getPageFromHash = () => {
+    const hash = window.location.hash.replace('#', '');
+    return VALID_PAGES.includes(hash) ? hash : 'home';
+  };
 
-  // Scroll to top on page change
+  const [currentPage, setPage] = useState(getPageFromHash());
+
+  // Listen for browser navigation (back/forward buttons)
   useEffect(() => {
+    const handleHashChange = () => {
+      setPage(getPageFromHash());
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Update the URL hash and scroll to top when the page changes
+  useEffect(() => {
+    if (currentPage === 'home') {
+      // Clear the hash for the home page for a cleaner URL
+      window.history.pushState(null, null, ' ');
+    } else {
+      window.location.hash = currentPage;
+    }
     window.scrollTo(0, 0);
   }, [currentPage]);
 
