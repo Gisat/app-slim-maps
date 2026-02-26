@@ -482,20 +482,21 @@ export default function App() {
               )
           },
           risk: {
-              intro: "The Flood Risk map evaluates the potential impact of flood events by combining flood hazard data with population and infrastructure exposure.",
+              intro: "This map illustrates the spatial distribution of flood risk across districts in the Green Nexus area (Zambia) for a 100-year return period scenario (Q100).",
               mapUrl: "https://gisat.github.io/slim-121-floods-map/slim_121_flood_risk.html",
               dataDescription: (
                   <div className="space-y-3">
-                      <p>This map identifies specific elements at risk within the projected flood zones:</p>
+                      <p>The risk levels are defined by the Composite Risk Index (CRI), calculated as a function of:</p>
                       <ul className="list-disc pl-5 space-y-1">
-                          <li><strong>Exposure Data:</strong> Includes settlements, road networks, and agricultural lands that intersect with predicted flood extents.</li>
-                          <li><strong>Risk Classification:</strong> Areas are categorized based on the severity of the hazard combined with the vulnerability of the exposed assets.</li>
+                          <li><strong>Hazard:</strong> Final Flood Hazard maps.</li>
+                          <li><strong>Exposure:</strong> Population, built-up areas, transportation infrastructure, and agriculture.</li>
+                          <li><strong>Socio-economic Vulnerability:</strong> Housing quality, demographics, and access to water.</li>
                       </ul>
                   </div>
               ),
               dataInterpretation: (
                   <div className="space-y-3">
-                      <p>Use this map to prioritize emergency response, allocate mitigation resources, and identify critical infrastructure that may require reinforcement or relocation to reduce future flood impacts.</p>
+                      <p>The map highlights priority hotspots where high physical exposure intersects with limited coping capacity. By classifying districts from Very Low to Very High risk, this tool supports strategic decision-making and resource allocation.</p>
                   </div>
               )
           }
