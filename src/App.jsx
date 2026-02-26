@@ -551,7 +551,7 @@ export default function App() {
       ],
       maps: {
           anomaly: {
-              intro: "This map shows the frequency of drought anomalies, indicating the proportion of time a specific location experienced worse-than-average drought conditions within a given year.",
+              intro: "This map shows the frequency of drought anomalies, indicating the proportion of time a specific location experienced anomalous drought conditions within a given year.",
               mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AnomalyFreq.html#8/-15.290/27.804",
               dataDescription: (
                 <div className="space-y-3">
