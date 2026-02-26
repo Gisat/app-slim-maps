@@ -446,34 +446,60 @@ export default function App() {
       title: "Floods",
       icon: Waves,
       iconColor: "text-blue-600",
-      intro: "Flood mapping aims to improve preparedness and response by identifying communities and infrastructure at risk, supporting mitigation efforts and emergency planning. These risk assessments are primarily based on topographical models, such as the HAND model, and include historical flood data.",
-      mapUrl: "https://gisat.github.io/slim-121-floods-map/#10/-15.7302/27.2639",
-      dataDescription: (
-        <div className="space-y-3">
-          <p>The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>DEM (Digital Elevation Model):</strong> SRTM (Shuttle Radar Topography Mission) data, approximately 30m resolution, was used.</li>
-            <li><strong>Rivers:</strong> HydroATLAS Zambia data was used for river networks.</li>
-          </ul>
-          <p>Flood analysis was prepared using the following inputs:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>GLOFAS (Global Flood Awareness System):</strong> Long time series data (1980-2018, daily values) for approximating discharges in coarse resolution.</li>
-            <li><strong>JRC Flood Map (Joint Research Centre):</strong> A map for a 100-year return period, valuable for estimating and validating expected flood extent.</li>
-            <li><strong>ESA WorldCover 2021:</strong> Used for hydrological characteristics of watersheds based on land cover.</li>
-          </ul>
-        </div>
-      ),
-      dataInterpretation: (
-         <div className="space-y-3">
-          <p>Obstacles to using this data include:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>River geometry limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only</li>
-            <li><strong>Calibration & validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</li>
-            <li><strong>Data quality vs. availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</li>
-            <li><strong>HAND limitations:</strong> HAND is a conceptual model, not a full hydrodynamic model, and does not consider factors like geological characteristics.</li>
-          </ul>
-         </div>
-      )
+      tabs: [
+          { id: 'hazard', name: 'Flood Hazard' },
+          { id: 'risk', name: 'Flood Risk' },
+      ],
+      maps: {
+          hazard: {
+              intro: "Flood mapping aims to improve preparedness and response by identifying communities and infrastructure at risk, supporting mitigation efforts and emergency planning. These risk assessments are primarily based on topographical models, such as the HAND model, and include historical flood data.",
+              mapUrl: "https://gisat.github.io/slim-121-floods-map/#10/-15.7302/27.2639",
+              dataDescription: (
+                <div className="space-y-3">
+                  <p>The HAND (Height Above Nearest Drainage) model is based on the following data sources:</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>DEM (Digital Elevation Model):</strong> SRTM (Shuttle Radar Topography Mission) data, approximately 30m resolution, was used.</li>
+                    <li><strong>Rivers:</strong> HydroATLAS Zambia data was used for river networks.</li>
+                  </ul>
+                  <p>Flood analysis was prepared using the following inputs:</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>GLOFAS (Global Flood Awareness System):</strong> Long time series data (1980-2018, daily values) for approximating discharges in coarse resolution.</li>
+                    <li><strong>JRC Flood Map (Joint Research Centre):</strong> A map for a 100-year return period, valuable for estimating and validating expected flood extent.</li>
+                    <li><strong>ESA WorldCover 2021:</strong> Used for hydrological characteristics of watersheds based on land cover.</li>
+                  </ul>
+                </div>
+              ),
+              dataInterpretation: (
+                 <div className="space-y-3">
+                  <p>Obstacles to using this data include:</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>River geometry limitation:</strong> Precise definition of channel geometries (longitudinal river profile vs. cross-section) is a challenge and is derived from DEM only.</li>
+                    <li><strong>Calibration & validation:</strong> A lack of observed flood extent data in Zambia makes robust model verification difficult.</li>
+                    <li><strong>Data quality vs. availability:</strong> There's a trade-off between the coarse resolution of GLOFAS data and the availability of precise in-situ measurements.</li>
+                    <li><strong>HAND limitations:</strong> HAND is a conceptual model, not a full hydrodynamic model, and does not consider factors like geological characteristics.</li>
+                  </ul>
+                 </div>
+              )
+          },
+          risk: {
+              intro: "The Flood Risk map evaluates the potential impact of flood events by combining flood hazard data with population and infrastructure exposure.",
+              mapUrl: "https://gisat.github.io/slim-121-floods-map/slim_121_flood_risk.html",
+              dataDescription: (
+                  <div className="space-y-3">
+                      <p>This map identifies specific elements at risk within the projected flood zones:</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                          <li><strong>Exposure Data:</strong> Includes settlements, road networks, and agricultural lands that intersect with predicted flood extents.</li>
+                          <li><strong>Risk Classification:</strong> Areas are categorized based on the severity of the hazard combined with the vulnerability of the exposed assets.</li>
+                      </ul>
+                  </div>
+              ),
+              dataInterpretation: (
+                  <div className="space-y-3">
+                      <p>Use this map to prioritize emergency response, allocate mitigation resources, and identify critical infrastructure that may require reinforcement or relocation to reduce future flood impacts.</p>
+                  </div>
+              )
+          }
+      }
     },
     wildfires: {
       title: "Wildfires",
