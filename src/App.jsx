@@ -525,56 +525,49 @@ export default function App() {
       ],
       maps: {
           anomaly: {
-              intro: "This map provides critical insights into drought conditions, helping to identify areas experiencing water deficits and supporting early warning systems for food security.",
+              intro: "This map shows the frequency of drought anomalies, indicating the proportion of time a specific location experienced worse-than-average drought conditions within a given year.",
               mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AnomalyFreq.html#8/-15.290/27.804",
               dataDescription: (
                 <div className="space-y-3">
-                  <p>The drought monitoring data leverages satellite-based indices to track precipitation anomalies and vegetation health over time.</p>
+                  <p>The maps are generated annually using four MODIS-derived variables:</p>
                   <ul className="list-disc pl-5 space-y-1">
-                    <li><strong>Data Source:</strong> Satellite precipitation estimates (e.g., CHIRPS) and vegetation indices (NDVI).</li>
-                    <li><strong>Methodology:</strong> Comparison of current conditions against long-term historical averages to calculate anomalies.</li>
-                    <li><strong>Key Metrics:</strong> Drought Anomaly Frequency and severity indices.</li>
+                    <li><strong>NDVI:</strong> Impact on green biomass density.</li>
+                    <li><strong>LST:</strong> Land surface temperature conditions.</li>
+                    <li><strong>ESI & WUE:</strong> Vegetation evapotranspiration and water use efficiency.</li>
                   </ul>
                 </div>
               ),
               dataInterpretation: (
-                 <div className="space-y-3">
-                  <p>Understanding drought patterns allows for:</p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li><strong>Early Warning:</strong> Identifying potential crop failures before they occur.</li>
-                    <li><strong>Resource Allocation:</strong> Directing aid and water resources to the most affected regions.</li>
-                    <li><strong>Long-term Planning:</strong> Adapting agricultural practices to changing climate patterns.</li>
-                  </ul>
-                 </div>
+                 <p>The values are expressed as percentages representing the ratio of detected drought anomalies to all valid satellite observations. For example, a value of 50% means the given spot stayed in a drought anomaly for half of the available observations that year.</p>
               )
           },
           impact: {
-              intro: "The Drought Impact Warning map integrates productivity indicators to highlight areas where agricultural output is currently threatened by water deficits.",
+              intro: "This map provides a mid-term prediction of drought impacts on biomass production in croplands and grasslands, helping to identify potential risks to food security.",
               mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_ImpactWarn.html",
               dataDescription: (
                   <div className="space-y-3">
-                      <p>This map displays multiple indicators related to agricultural productivity and drought impact:</p>
+                      <p>Using a time-series of vegetation and climate variables (NDVI, LST, ESI, GPP, WUE, and precipitation), the map offers four outputs:</p>
                       <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>Absolute Productivity:</strong> Estimated biomass production.</li>
-                        <li><strong>Long-Term Average:</strong> Historical baseline for comparison.</li>
-                        <li><strong>Relative to Average/Maximum:</strong> Productivity anomalies indicating potential yield reduction.</li>
+                        <li><strong>Absolute Productivity:</strong> Estimated cumulative biomass production.</li>
+                        <li><strong>Long-Term Average:</strong> Historical baseline calculated from 2000–2024.</li>
+                        <li><strong>Relative to Average / Maximum:</strong> The ratio of current estimates against the historical mean or maximum.</li>
                       </ul>
                   </div>
               ),
               dataInterpretation: (
                   <div className="space-y-3">
-                      <p>Use this tool to identify specific areas where current productivity significantly deviates from the historical norm, indicating a high risk of drought impact on food security.</p>
+                      <p>Rather than absolute units (like t/ha), this tool uses a unitless cumulative biomass index where higher values represent greater productivity. On the "Relative" layers, a value of 100% signifies average production. Values below 100% indicate expected biomass deficits, while values above indicate surpluses.</p>
                   </div>
               )
           },
           aggregated: {
-              intro: "This map provides aggregated drought visualizations across different seasonal periods (Hot-Dry, Wet, Cold-Dry) and annual cycles, allowing for a comprehensive assessment of drought persistence and seasonal variability.",
+              intro: "These maps provide an overview of drought hot-spots through spatio-temporal aggregation, allowing for a comprehensive assessment of drought persistence and seasonal variability.",
               mapUrl: "https://gisat.github.io/slim-123-drought-map/index_Drought_AggregMaps.html",
               dataDescription: (
                   <div className="space-y-3">
-                      <p>The aggregated maps visualize drought conditions derived from normalized indices over specific timeframes:</p>
+                      <p>Generated using the same four MODIS variables (NDVI, LST, ESI, WUE), the data is visualized across four specific timeframes:</p>
                       <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>365 Days:</strong> Annual overview.</li>
+                        <li><strong>365 Days:</strong> Annual cycle (September to August).</li>
                         <li><strong>Hot-Dry Season:</strong> September to October.</li>
                         <li><strong>Wet Season:</strong> November to April.</li>
                         <li><strong>Cold-Dry Season:</strong> May to August.</li>
@@ -583,7 +576,14 @@ export default function App() {
               ),
               dataInterpretation: (
                   <div className="space-y-3">
-                      <p>Select specific seasons to analyze how drought conditions evolve throughout the year. The transparency slider allows for overlaying these aggregated layers with other contextual information.</p>
+                      <p>Current conditions are compared to a 2000–2024 reference period and aggregated into a 5-class severity scale:</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Class 1:</strong> Very close to the worst drought conditions ever observed.</li>
+                        <li><strong>Class 2:</strong> Worse than common conditions.</li>
+                        <li><strong>Class 3:</strong> Close to common conditions.</li>
+                        <li><strong>Class 4:</strong> Better than common conditions (wetter than usual).</li>
+                        <li><strong>Class 5:</strong> Close to the wettest conditions ever observed.</li>
+                      </ul>
                   </div>
               )
           }
