@@ -23,7 +23,7 @@ const Header = ({ currentPage, setPage }) => {
     { id: 'home', title: 'Home', activeColor: 'text-orange-600', hoverColor: 'hover:text-orange-600' },
     { id: 'landscapechange', title: 'Landscape Change', activeColor: 'text-green-600', hoverColor: 'hover:text-green-600' },
     { id: 'floods', title: 'Floods', activeColor: 'text-blue-600', hoverColor: 'hover:text-blue-600' },
-    { id: 'wildfires', title: 'Wildfires', activeColor: 'text-red-600', hoverColor: 'hover:text-red-600' },
+    // { id: 'wildfires', title: 'Wildfires', activeColor: 'text-red-600', hoverColor: 'hover:text-red-600' }, // TEMPORARILY HIDDEN
     { id: 'drought', title: 'Drought', activeColor: 'text-orange-600', hoverColor: 'hover:text-orange-600' },
   ];
 
@@ -140,9 +140,15 @@ const HomePage = ({ setPage }) => {
           <p className="text-base lg:text-lg 2xl:text-xl text-gray-100 drop-shadow-md leading-relaxed mb-4 2xl:mb-6">
             The SLIM (Sustainable Landscape through Integrated Management) project aims to build institutional capacity in Zambia for effective landscape management and natural disaster preparedness through the use of geospatial data.
           </p>
-          <p className="text-sm lg:text-base 2xl:text-lg text-blue-200 font-medium drop-shadow-md">
+          
+          {/* TEMPORARILY HIDDEN WILDFIRES FROM INTRO TEXT */}
+          {/* <p className="text-sm lg:text-base 2xl:text-lg text-blue-200 font-medium drop-shadow-md">
             Explore maps in four thematic areas: Landscape Change, Floods, Wildfires, and Drought.
+          </p> */}
+          <p className="text-sm lg:text-base 2xl:text-lg text-blue-200 font-medium drop-shadow-md">
+            Explore maps in three thematic areas: Landscape Change, Floods, and Drought.
           </p>
+
         </div>
       </div>
 
@@ -180,8 +186,8 @@ const HomePage = ({ setPage }) => {
               <span className="mt-3 lg:mt-4 2xl:mt-6 text-sm 2xl:text-base font-semibold text-blue-600 group-hover:text-blue-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
             </div>
 
-            {/* Wildfires Tile */}
-            <div 
+            {/* TEMPORARILY HIDDEN WILDFIRES TILE */}
+            {/* <div 
               className="group bg-white rounded-xl shadow-md p-4 lg:p-5 2xl:p-8 flex flex-col items-center text-center cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full justify-between"
               onClick={() => setPage('wildfires')}
             >
@@ -194,6 +200,7 @@ const HomePage = ({ setPage }) => {
               </div>
               <span className="mt-3 lg:mt-4 2xl:mt-6 text-sm 2xl:text-base font-semibold text-red-600 group-hover:text-red-700 flex items-center">View Map <span className="ml-1 transition-transform group-hover:translate-x-1">&rarr;</span></span>
             </div>
+            */}
 
             {/* Drought Tile */}
             <div 
@@ -385,7 +392,8 @@ const Footer = ({ currentPage }) => {
 }
 
 // --- VALID PAGES DEFINITION FOR ROUTING ---
-const VALID_PAGES = ['home', 'landscapechange', 'floods', 'wildfires', 'drought'];
+// const VALID_PAGES = ['home', 'landscapechange', 'floods', 'wildfires', 'drought']; // TEMPORARILY HIDDEN
+const VALID_PAGES = ['home', 'landscapechange', 'floods', 'drought'];
 
 // --- MAIN APP COMPONENT ---
 export default function App() {
@@ -502,6 +510,8 @@ export default function App() {
           }
       }
     },
+    // --- TEMPORARILY HIDDEN WILDFIRES DATA ---
+    /*
     wildfires: {
       title: "Wildfires",
       icon: Flame,
@@ -541,6 +551,7 @@ export default function App() {
           }
       }
     },
+    */
     drought: {
       title: "Drought",
       icon: Sun,
@@ -624,8 +635,8 @@ export default function App() {
         return <ActivityPage {...pageData.landscapechange} />;
       case 'floods':
         return <ActivityPage {...pageData.floods} />;
-      case 'wildfires':
-        return <ActivityPage {...pageData.wildfires} />;
+      // case 'wildfires':
+      //   return <ActivityPage {...pageData.wildfires} />; // TEMPORARILY HIDDEN
       case 'drought':
         return <ActivityPage {...pageData.drought} />;
       case 'home':
