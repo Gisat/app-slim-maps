@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { LandPlot, Waves, Flame, Menu, X, Sun } from 'lucide-react';
+// import { LandPlot, Waves, Flame, Menu, X, Sun } from 'lucide-react'; // Flame temporarily hidden
+import { LandPlot, Waves, Menu, X, Sun } from 'lucide-react';
 
 // --- HELPER COMPONENTS ---
 
