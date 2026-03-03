@@ -366,7 +366,7 @@ const Footer = ({ currentPage }) => {
                        <img className="h-10 w-auto object-contain" src="EN Co-funded by the EU_POS.jpg" alt="EU" onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x50/eee/333?text=EU+Logo'; }}/>
                        <div className="h-8 w-px bg-gray-200"></div>
                        <img className="h-8 w-auto rounded shadow-sm object-cover" src="https://flagcdn.com/cz.svg" alt="Czechia" />
-                       <img className="h-8 w-auto rounded shadow-sm object-cover" src="https://flagcdn.com/se.svg" alt="Sweden" />
+                       <img className="h-8 w-auto rounded shadow-sm object-contain" src="sweden.png" alt="Sweden" />
                     </div>
                   </div>
 
