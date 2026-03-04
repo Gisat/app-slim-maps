@@ -433,23 +433,54 @@ export default function App() {
       title: "Landscape Change",
       icon: LandPlot,
       iconColor: "text-green-600",
-      intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
-      mapUrl: "https://gisat.github.io/slim-112-lulc-map/#11/-15.4607/27.9242",
-      dataDescription: (
-        <div className="space-y-3">
-          <p>The data presented here is derived from high resolution satellite imagery and processed using advanced machine learning algorithms. It delivers a detailed portrait of the landscape and its changes, capturing natural features, vegetation, and patterns of human activity with precision.</p>
-          <p>Land cover types were selected and validated with the active participation of Zambian public sector stakeholders to reflect their specific needs and use cases.</p>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000–2024.</li>
-            <li><strong>Ancillary data:</strong> Digital Elevation Model (DEM-SRTM), EO data derivatives like VIs</li>
-            <li><strong>Training data:</strong> Existing Land Cover maps (SLIM Baseline 2023, WorldCover2020, WorldCover2021) and ancillary datasets including GlobalForestWatch, OpenStreetMap, WorldCereal, ZambiaWSF, GHSL, WorldWater, Hydro Zambia, and Global Wetlands.</li>
-          </ul>
-          <p>The data was interpreted using a proprietary, state-of-the-art Machine Learning classification processing chain.</p>
-        </div>
-      ),
-      dataInterpretation: (
-         <p>The concept of LC flows represents changes identified by initial and current LC classes. Grouped change combinations represent defined flows, differentiating key and secondary flows, and excluding unlikely types.</p>
-      )
+      tabs: [
+          { id: 'status', name: 'Landscape Status' },
+          { id: 'structure', name: 'Landscape Structure' },
+      ],
+      maps: {
+          status: {
+              intro: "This map captures the status of Zambia’s landscape and historical changes to it since 2000. Building on previous landscape monitoring, it serves as a multi-purpose product to support environmental protection, good governance, climate change adaptation, and risk reduction.",
+              mapUrl: "https://gisat.github.io/slim-112-lulc-map/index.html",
+              dataDescription: (
+                <div className="space-y-3">
+                  <p>The data presented here is derived from high resolution satellite imagery and processed using advanced machine learning algorithms. It delivers a detailed portrait of the landscape and its changes, capturing natural features, vegetation, and patterns of human activity with precision.</p>
+                  <p>Land cover types were selected and validated with the active participation of Zambian public sector stakeholders to reflect their specific needs and use cases.</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>Primary data:</strong> Monthly Landsat and Sentinel-2 composites from 2000–2024.</li>
+                    <li><strong>Ancillary data:</strong> Digital Elevation Model (DEM-SRTM), EO data derivatives like VIs</li>
+                    <li><strong>Training data:</strong> Existing Land Cover maps (SLIM Baseline 2023, WorldCover2020, WorldCover2021) and ancillary datasets including GlobalForestWatch, OpenStreetMap, WorldCereal, ZambiaWSF, GHSL, WorldWater, Hydro Zambia, and Global Wetlands.</li>
+                  </ul>
+                  <p>The data was interpreted using a proprietary, state-of-the-art Machine Learning classification processing chain.</p>
+                </div>
+              ),
+              dataInterpretation: (
+                 <p>The concept of LC flows represents changes identified by initial and current LC classes. Grouped change combinations represent defined flows, differentiating key and secondary flows, and excluding unlikely types.</p>
+              )
+          },
+          structure: {
+              intro: "This analytical view provides detailed insights into land cover dynamics and structural transitions. Beyond general composition, it highlights critical landscape change flows—specifically tree cover loss, agricultural expansion, and urbanization—which represent the most significant environmental pressures in the region.",
+              mapUrl: "https://gisat.github.io/slim-112-lulc-map/landscape_structure.html",
+              dataDescription: (
+                <div className="space-y-3">
+                  <p>The analysis is based on long-term land cover mapping aggregated into five-year intervals. Change patterns are derived and further categorized into landscape flows, which provide a more process-oriented representation of environmental shifts than simple pixel-to-pixel comparisons.</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>Land Cover Structure:</strong> Visualizes areal class composition and five-year evolutionary trends to compare structural shifts over time.</li>
+                    <li><strong>Key Landscape Changes:</strong> Quantifies the areal share of the most critical change flows, such as deforestation and urban growth, essential for targeted land management.</li>
+                  </ul>
+                </div>
+              ),
+              dataInterpretation: (
+                 <div className="space-y-3">
+                  <p><strong>Land Evolution:</strong> This section categorizes flows by their impact on the natural landscape.</p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li><strong>Losses (Negative):</strong> Human-affected patterns such as urbanization, degradation, and deforestation.</li>
+                    <li><strong>Gains (Positive):</strong> Improvements in natural landscape through afforestation, agricultural withdrawal (succession), and natural recovery.</li>
+                    <li><strong>Stable:</strong> Areas where the land cover has remained persistent throughout the study period.</li>
+                  </ul>
+                 </div>
+              )
+          }
+      }
     },
     floods: {
       title: "Floods",
